@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b0fkyaxp61xgl"]
+
+[ext_resource type="ArrayMesh" uid="uid://ddrqpfljx7dh5" path="res://AssaultRifle_01.obj" id="1_0nhrr"]
+[ext_resource type="Script" uid="uid://dqw1byhex5h4i" path="res://scripts/goo.gd" id="1_elx7s"]
+
+[node name="Node3D" type="Node3D" unique_id=441911854]
+script = ExtResource("1_elx7s")
+
+[node name="goo" type="MeshInstance3D" parent="." unique_id=158352240]
+mesh = ExtResource("1_0nhrr")
