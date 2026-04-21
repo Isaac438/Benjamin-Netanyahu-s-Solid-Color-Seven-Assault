@@ -1,6 +1,6 @@
 # Object Export From Tinkercad Server 2015
 
-mtllib obj.mtl
+mtllib Island_Concrete.mtl
 
 o obj_0
 v 20 		11.998 		12.003
