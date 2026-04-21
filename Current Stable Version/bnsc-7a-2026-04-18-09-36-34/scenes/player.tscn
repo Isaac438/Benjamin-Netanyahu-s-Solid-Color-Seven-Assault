@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dkpdqwad7aylg"]
+
+[ext_resource type="Script" uid="uid://j1l8tdrphiph" path="res://scripts/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dvewr3hfqbbeh" path="res://scripts/camera.gd" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://b0fkyaxp61xgl" path="res://scenes/goo.tscn" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://q4s6trwgegsw" path="res://Untitled design.png" id="3_qhqgy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i3pqv"]
+
+[node name="player" type="CharacterBody3D" unique_id=457843126]
+script = ExtResource("1_4flbx")
+
+[node name="camera" type="Camera3D" parent="." unique_id=1709647461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13406426, 0.5588001, 0.25181156)
+script = ExtResource("2_g2els")
+
+[node name="goo" parent="camera" unique_id=158352240 instance=ExtResource("3_dqkch")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.38421524, -0.3088926, -0.53579044)
+
+[node name="RayCast3D" type="RayCast3D" parent="camera" unique_id=1919775766]
+target_position = Vector3(0, 0, -100)
+
+[node name="CenterContainer" type="CenterContainer" parent="camera" unique_id=481200390]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="camera/CenterContainer" unique_id=105480368]
+layout_mode = 2
+texture = ExtResource("3_qhqgy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=892495866]
+mesh = SubResource("CapsuleMesh_onrkg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=518244195]
+shape = SubResource("CapsuleShape3D_i3pqv")

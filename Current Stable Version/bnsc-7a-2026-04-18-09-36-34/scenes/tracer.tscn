@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dmenbdsvahwlb"]
+
+[ext_resource type="Script" uid="uid://bfx3f0acoonxu" path="res://scenes/tracer.gd" id="1_o68uk"]
+
+[sub_resource type="CameraTexture" id="CameraTexture_jjn3q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o68uk"]
+metallic = 1.0
+roughness = 0.0
+emission_enabled = true
+emission_energy_multiplier = 16.0
+emission_operator = 1
+emission_on_uv2 = true
+emission_texture = SubResource("CameraTexture_jjn3q")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6pimm"]
+material = SubResource("StandardMaterial3D_o68uk")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.05
+
+[node name="tracer" type="Node3D" unique_id=216483458]
+script = ExtResource("1_o68uk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1314489560]
+mesh = SubResource("CylinderMesh_6pimm")
