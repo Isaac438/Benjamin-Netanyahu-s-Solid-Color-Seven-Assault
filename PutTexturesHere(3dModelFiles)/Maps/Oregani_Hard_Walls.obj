@@ -1,6 +1,6 @@
 # Object Export From Tinkercad Server 2015
 
-mtllib obj.mtl
+mtllib Oregani_Hard_Walls.mtl
 
 o obj_0
 v -1 		-16 		20
