@@ -1,6 +1,6 @@
 # Blender 5.0.1
 # www.blender.org
-mtllib Island.mtl
+mtllib Island_Ocean.mtl
 o Plane
 v -100.000000 0.000000 100.000000
 v 100.000000 0.000000 100.000000

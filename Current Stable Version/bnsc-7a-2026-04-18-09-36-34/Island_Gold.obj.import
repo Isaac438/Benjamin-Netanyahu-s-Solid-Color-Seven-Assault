@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ckdllcd08jdxh"
+path="res://.godot/imported/Island_Gold.obj-d9e290cb2f5420094c4dee1b259caa75.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Island_Gold.obj-d9e290cb2f5420094c4dee1b259caa75.mesh"]
+
+source_file="res://Island_Gold.obj"
+dest_files=["res://.godot/imported/Island_Gold.obj-d9e290cb2f5420094c4dee1b259caa75.mesh", "res://.godot/imported/Island_Gold.obj-d9e290cb2f5420094c4dee1b259caa75.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

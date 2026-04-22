@@ -2,8 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dkpdqwad7aylg" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://cx6t3dkauh1qq" path="res://scenes/target.tscn" id="2_rwgxs"]
-[ext_resource type="ArrayMesh" uid="uid://bdhj5ipemvey3" path="res://scenes/Basic_map_concrete.obj" id="3_4wyf3"]
-[ext_resource type="ArrayMesh" uid="uid://lnfoqfgf5akt" path="res://scenes/Basic_map_Invis_barrier.obj" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://c614gq14to50d" path="res://scenes/the_island.tscn" id="5_71j4m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,12 +19,6 @@ tonemap_mode = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_rwgxs"]
 size = Vector3(100, 1, 100)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4wyf3"]
-data = PackedVector3Array(28.0166, 0, 56.0333, -28.0166, 0, 56.0333, 28.0166, 0, -56.0333, 28.0166, 0, -56.0333, -28.0166, 0, 56.0333, -28.0166, 0, -56.0333, -10, 20, 10, -10, 0, 10, -10, 20, -10, -10, 20, -10, -10, 0, 10, -10, 0, -10, -10, 20, -10, -10, 0, -10, 10, 20, -10, 10, 20, -10, -10, 0, -10, 10, 0, -10, 10, 20, -10, 10, 0, -10, 10, 20, 10, 10, 20, 10, 10, 0, -10, 10, 0, 10, 10, 20, 10, 10, 0, 10, -10, 20, 10, -10, 20, 10, 10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, -10, 10, 0, 10, 10, 0, 10, -10, 0, -10, -10, 0, 10, -10, 20, -10, 10, 20, -10, -10, 20, 10, -10, 20, 10, 10, 20, -10, 10, 20, 10)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_71j4m"]
-data = PackedVector3Array(-28.0166, 0, 56.0333, 28.0166, 0, 56.0333, -28.0166, 28.0166, 56.0333, -28.0166, 28.0166, 56.0333, 28.0166, 0, 56.0333, 28.0166, 28.0166, 56.0333, -28.0166, 0, -56.0333, -28.0166, 0, 56.0333, -28.0166, 28.0166, -56.0333, -28.0166, 28.0166, -56.0333, -28.0166, 0, 56.0333, -28.0166, 28.0166, 56.0333, 28.0166, 0, 56.0333, 28.0166, 0, -56.0333, 28.0166, 28.0166, 56.0333, 28.0166, 28.0166, 56.0333, 28.0166, 0, -56.0333, 28.0166, 28.0166, -56.0333, 28.0166, 0, -56.0333, -28.0166, 0, -56.0333, 28.0166, 28.0166, -56.0333, 28.0166, 28.0166, -56.0333, -28.0166, 0, -56.0333, -28.0166, 28.0166, -56.0333)
-
 [node name="world" type="Node3D" unique_id=1632457144]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1247816672]
@@ -36,7 +29,7 @@ shadow_enabled = true
 environment = SubResource("Environment_tlwt5")
 
 [node name="player" parent="." unique_id=457843126 instance=ExtResource("1_nnsk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20.794338)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.120102, 1, -20.794338)
 
 [node name="target" parent="." unique_id=1444307239 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.952252, 1.0000002, -22.4212)
@@ -59,21 +52,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.6239696, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="death plane" unique_id=815907809]
 shape = SubResource("BoxShape3D_rwgxs")
 
-[node name="Debug Map Concrete" type="MeshInstance3D" parent="." unique_id=1638966992]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.001461029, 0.005579233, -0.0026745796)
-mesh = ExtResource("3_4wyf3")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Debug Map Concrete" unique_id=1576341287]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debug Map Concrete/StaticBody3D" unique_id=1855931820]
-shape = SubResource("ConcavePolygonShape3D_4wyf3")
-
-[node name="Debug Map Invis Barrier" type="MeshInstance3D" parent="." unique_id=2074512653]
-mesh = ExtResource("4_k0juu")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="Debug Map Invis Barrier" unique_id=1952470751]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debug Map Invis Barrier/StaticBody3D2" unique_id=1006485496]
-shape = SubResource("ConcavePolygonShape3D_71j4m")
+[node name="Island" parent="." unique_id=1222739436 instance=ExtResource("5_71j4m")]
 
 [connection signal="body_entered" from="death plane" to="player" method="_on_death_plane_body_entered"]

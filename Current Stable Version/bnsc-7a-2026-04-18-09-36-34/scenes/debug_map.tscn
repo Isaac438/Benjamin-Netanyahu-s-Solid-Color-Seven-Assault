@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://4dnaqr8n5e5o"]
+
+[ext_resource type="ArrayMesh" uid="uid://bdhj5ipemvey3" path="res://scenes/Basic_map_concrete.obj" id="1_iv4pa"]
+[ext_resource type="ArrayMesh" uid="uid://lnfoqfgf5akt" path="res://scenes/Basic_map_Invis_barrier.obj" id="2_speln"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c2rtx"]
+data = PackedVector3Array(28.0166, 0, 56.0333, -28.0166, 0, 56.0333, 28.0166, 0, -56.0333, 28.0166, 0, -56.0333, -28.0166, 0, 56.0333, -28.0166, 0, -56.0333, -10, 20, 10, -10, 0, 10, -10, 20, -10, -10, 20, -10, -10, 0, 10, -10, 0, -10, -10, 20, -10, -10, 0, -10, 10, 20, -10, 10, 20, -10, -10, 0, -10, 10, 0, -10, 10, 20, -10, 10, 0, -10, 10, 20, 10, 10, 20, 10, 10, 0, -10, 10, 0, 10, 10, 20, 10, 10, 0, 10, -10, 20, 10, -10, 20, 10, 10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, -10, 10, 0, 10, 10, 0, 10, -10, 0, -10, -10, 0, 10, -10, 20, -10, 10, 20, -10, -10, 20, 10, -10, 20, 10, 10, 20, -10, 10, 20, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6y21t"]
+data = PackedVector3Array(-28.0166, 0, 56.0333, 28.0166, 0, 56.0333, -28.0166, 28.0166, 56.0333, -28.0166, 28.0166, 56.0333, 28.0166, 0, 56.0333, 28.0166, 28.0166, 56.0333, -28.0166, 0, -56.0333, -28.0166, 0, 56.0333, -28.0166, 28.0166, -56.0333, -28.0166, 28.0166, -56.0333, -28.0166, 0, 56.0333, -28.0166, 28.0166, 56.0333, 28.0166, 0, 56.0333, 28.0166, 0, -56.0333, 28.0166, 28.0166, 56.0333, 28.0166, 28.0166, 56.0333, 28.0166, 0, -56.0333, 28.0166, 28.0166, -56.0333, 28.0166, 0, -56.0333, -28.0166, 0, -56.0333, 28.0166, 28.0166, -56.0333, 28.0166, 28.0166, -56.0333, -28.0166, 0, -56.0333, -28.0166, 28.0166, -56.0333)
+
+[node name="Debug_Map" type="Node3D" unique_id=887379178]
+
+[node name="Debug Map Concrete" type="MeshInstance3D" parent="." unique_id=1499973762]
+mesh = ExtResource("1_iv4pa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Debug Map Concrete" unique_id=106774074]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debug Map Concrete/StaticBody3D" unique_id=700079740]
+shape = SubResource("ConcavePolygonShape3D_c2rtx")
+
+[node name="Debug Map Invis_Barrier" type="MeshInstance3D" parent="." unique_id=353492015]
+mesh = ExtResource("2_speln")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Debug Map Invis_Barrier" unique_id=2121021651]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debug Map Invis_Barrier/StaticBody3D" unique_id=1203963799]
+shape = SubResource("ConcavePolygonShape3D_6y21t")
