@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://3l6t7820c85p"]
+
+[ext_resource type="ArrayMesh" uid="uid://lnfoqfgf5akt" path="res://scenes/Basic_map_Invis_barrier.obj" id="1_grwne"]
+[ext_resource type="ArrayMesh" uid="uid://bdhj5ipemvey3" path="res://scenes/Basic_map_concrete.obj" id="1_iv4pa"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_iv4pa"]
+data = PackedVector3Array(-28.0166, 0, 56.0333, 28.0166, 0, 56.0333, -28.0166, 28.0166, 56.0333, -28.0166, 28.0166, 56.0333, 28.0166, 0, 56.0333, 28.0166, 28.0166, 56.0333, -28.0166, 0, -56.0333, -28.0166, 0, 56.0333, -28.0166, 28.0166, -56.0333, -28.0166, 28.0166, -56.0333, -28.0166, 0, 56.0333, -28.0166, 28.0166, 56.0333, 28.0166, 0, 56.0333, 28.0166, 0, -56.0333, 28.0166, 28.0166, 56.0333, 28.0166, 28.0166, 56.0333, 28.0166, 0, -56.0333, 28.0166, 28.0166, -56.0333, 28.0166, 0, -56.0333, -28.0166, 0, -56.0333, 28.0166, 28.0166, -56.0333, 28.0166, 28.0166, -56.0333, -28.0166, 0, -56.0333, -28.0166, 28.0166, -56.0333)
+
+[node name="Debug_Map" type="Node3D" unique_id=1688110397]
+
+[node name="Concrete" type="MeshInstance3D" parent="." unique_id=430762463]
+mesh = ExtResource("1_iv4pa")
+
+[node name="Invis Barrier" type="MeshInstance3D" parent="." unique_id=515153208]
+mesh = ExtResource("1_grwne")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Invis Barrier" unique_id=1088783560]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Invis Barrier/StaticBody3D" unique_id=671643921]
+shape = SubResource("ConcavePolygonShape3D_iv4pa")
