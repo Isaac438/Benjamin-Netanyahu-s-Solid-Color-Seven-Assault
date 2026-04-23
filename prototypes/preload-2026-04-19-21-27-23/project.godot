@@ -18,6 +18,10 @@ config/name="Preload 2026 04 19 21 27 23"
 run/main_scene="uid://c0n1trryj0ecn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[autoload]
+
+global="*uid://d2b71bxano53q"
+
 [input]
 
 w={

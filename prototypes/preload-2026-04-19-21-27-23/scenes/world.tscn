@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dkpdqwad7aylg" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://cx6t3dkauh1qq" path="res://scenes/target.tscn" id="2_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://dkigtmrqvw3id" path="res://scenes/island.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://bvllxe1sa4wiv" path="res://scenes/oregani.tscn" id="3_4wyf3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -85,6 +85,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19324875, 1, 18.966717)
 [node name="target16" parent="." unique_id=50621687 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.276127, 1, 42.59919)
 
-[node name="Island" parent="." unique_id=776079974 instance=ExtResource("3_4wyf3")]
+[node name="Oregani" parent="." unique_id=448369609 instance=ExtResource("3_4wyf3")]
 
 [connection signal="body_entered" from="death plane" to="player" method="_on_death_plane_body_entered"]

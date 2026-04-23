@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://byqr6o1lcagf5"
+path="res://.godot/imported/Oregani_Hard_Walls.obj-0d7d259820b6589922d198110a5cf947.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Oregani_Hard_Walls.obj-0d7d259820b6589922d198110a5cf947.mesh"]
+
+source_file="res://scenes/Oregani_Hard_Walls.obj"
+dest_files=["res://.godot/imported/Oregani_Hard_Walls.obj-0d7d259820b6589922d198110a5cf947.mesh", "res://.godot/imported/Oregani_Hard_Walls.obj-0d7d259820b6589922d198110a5cf947.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
