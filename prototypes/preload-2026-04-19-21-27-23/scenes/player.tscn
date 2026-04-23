@@ -36,6 +36,8 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("3_qhqgy")
 
+[node name="RayCast3D" type="RayCast3D" parent="camera" unique_id=374600923]
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=892495866]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_onrkg")

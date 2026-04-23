@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dkpdqwad7aylg" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://cx6t3dkauh1qq" path="res://scenes/target.tscn" id="2_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://bvllxe1sa4wiv" path="res://scenes/oregani.tscn" id="3_4wyf3"]
+[ext_resource type="Script" uid="uid://cbohu124gd1n4" path="res://scenes/map_root.gd" id="3_4wyf3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -29,7 +29,7 @@ shadow_enabled = true
 environment = SubResource("Environment_tlwt5")
 
 [node name="player" parent="." unique_id=457843126 instance=ExtResource("1_nnsk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.390354, 1, -20.794338)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.958916, 6.1308594, 0.65735245)
 
 [node name="target" parent="." unique_id=1444307239 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.952252, 1.0000002, -22.4212)
@@ -85,6 +85,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19324875, 1, 18.966717)
 [node name="target16" parent="." unique_id=50621687 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.276127, 1, 42.59919)
 
-[node name="Oregani" parent="." unique_id=448369609 instance=ExtResource("3_4wyf3")]
+[node name="MapRoot" type="Node3D" parent="." unique_id=522363326]
+script = ExtResource("3_4wyf3")
 
 [connection signal="body_entered" from="death plane" to="player" method="_on_death_plane_body_entered"]
