@@ -7,7 +7,7 @@ var maps = [
 ]
 
 var current_map: Node = null
-var index := 0
+var index := 1
 
 func _ready():
 	switch_to_map(1) # start on island if you want
