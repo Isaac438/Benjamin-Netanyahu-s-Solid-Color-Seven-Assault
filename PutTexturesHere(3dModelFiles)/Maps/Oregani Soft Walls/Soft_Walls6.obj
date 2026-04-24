@@ -1,6 +1,6 @@
 # Object Export From Tinkercad Server 2015
 
-mtllib obj.mtl
+mtllib Soft_Walls6.mtl
 
 o obj_0
 v -10 		-8 		20
