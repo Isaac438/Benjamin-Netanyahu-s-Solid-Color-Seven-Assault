@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var map_root = self
+
 var maps = [
 	preload("res://scenes/oregani.tscn"),
 	preload("res://scenes/island.tscn"),
@@ -7,19 +9,22 @@ var maps = [
 ]
 
 var current_map: Node = null
-var index := 1
 
 func _ready():
-	switch_to_map(1) # start on island if you want
+	global.map_changed.connect(_on_map_changed)
 
-func _input(event):
-	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
-		index = (index + 1) % maps.size()
-		switch_to_map(index)
+	# load starting map
+	_on_map_changed(global.map)
+
+func _on_map_changed(new_map: int):
+	switch_to_map(new_map)
 
 func switch_to_map(i: int):
+	if i < 0 or i >= maps.size():
+		return
+
 	if current_map:
 		current_map.queue_free()
 
 	current_map = maps[i].instantiate()
-	add_child(current_map)
+	map_root.add_child(current_map)
