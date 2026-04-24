@@ -10,6 +10,7 @@ func _ready():
 
 	pause_menu.visible = false
 	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	map_changed.emit(map)
 var paused := false
 var map := 0
 
