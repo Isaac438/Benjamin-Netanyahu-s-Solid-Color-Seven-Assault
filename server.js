@@ -1,0 +1,22 @@
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Node Server</title>
+    </head>
+    <body>
+        <h1>Hello from HTML5!</h1>
+        <p>This page is served dynamically by Node.js.</p>
+    </body>
+    </html>
+  `);
+});
+
+server.listen(3000, () => {
+  console.log('Server running at http://localhost:3000/');
+});
