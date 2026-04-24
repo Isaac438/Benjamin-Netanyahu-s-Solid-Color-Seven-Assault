@@ -23,8 +23,20 @@ func _input(event):
 		camera.rotation.x = clampf(camera.rotation.x,-deg_to_rad(90), deg_to_rad(90))
 
 func _ready():
+	global.map_changed.connect(teleport)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+func teleport(new_map):
+	call_deferred("_do_teleport")
+func _do_teleport():
+	await get_tree().process_frame
+	await get_tree().process_frame  # important
 
+	var map_root = get_tree().current_scene.get_node("MapRoot")
+	var map = map_root.get_child(0)
+	var spawn = map.find_child("SpawnPoint", true, false)
+
+	if spawn:
+		global_transform.origin = spawn.global_transform.origin
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
