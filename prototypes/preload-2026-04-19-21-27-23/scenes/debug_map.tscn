@@ -26,3 +26,6 @@ mesh = ExtResource("1_grwne")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Invis Barrier/StaticBody3D" unique_id=671643921]
 shape = SubResource("ConcavePolygonShape3D_iv4pa")
+
+[node name="SpawnPoint" type="Node3D" parent="." unique_id=798814080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23.390831)
