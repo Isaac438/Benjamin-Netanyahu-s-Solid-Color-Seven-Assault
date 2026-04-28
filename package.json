@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Isaac438/Benjamin-Netanyahu-s-Solid-Color-Seven-Siege/issues"
   },
-  "homepage": "https://github.com/Isaac438/Benjamin-Netanyahu-s-Solid-Color-Seven-Siege#readme"
+  "homepage": "https://github.com/Isaac438/Benjamin-Netanyahu-s-Solid-Color-Seven-Siege#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
