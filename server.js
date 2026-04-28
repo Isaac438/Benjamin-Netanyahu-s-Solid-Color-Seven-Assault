@@ -9,9 +9,9 @@ const server = http.createServer((req, res) => {
         <meta charset="UTF-8">
         <title>My Node Server</title>
     </head>
-    <body>
-        <h1>Hello from HTML5!</h1>
-        <p>This page is served dynamically by Node.js.</p>
+    <body> 
+        <h1>WIP Solid Color Seven Assault R6 Ripoff</h1>
+        <p>This page is run on Node.js.</p>
     </body>
     </html>
   `);
