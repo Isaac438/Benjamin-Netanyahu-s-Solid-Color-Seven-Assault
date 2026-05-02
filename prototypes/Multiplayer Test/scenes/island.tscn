@@ -99,24 +99,6 @@ shape = SubResource("ConcavePolygonShape3D_migvp")
 [node name="SpawnPoint" type="Node3D" parent="." unique_id=1770714646]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, 0)
 
-[node name="SpawnPoint2" type="Node3D" parent="." unique_id=1812354932]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.286301, 0, 52.316086)
-
-[node name="SpawnPoint3" type="Node3D" parent="." unique_id=575230728]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0484467, 0, -69.85473)
-
-[node name="SpawnPoint4" type="Node3D" parent="." unique_id=526896997]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.90912, 0, 0)
-
-[node name="SpawnPoint5" type="Node3D" parent="." unique_id=1513334420]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.655876, 0, 0)
-
-[node name="SpawnPoint6" type="Node3D" parent="." unique_id=1393117353]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, 74.01843)
-
-[node name="SpawnPoint7" type="Node3D" parent="." unique_id=2005640218]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, -85.969025)
-
 [node name="Invis Barrier" type="MeshInstance3D" parent="." unique_id=8772259]
 transform = Transform3D(3.3, 0, 0, 0, 1, 0, 0, 0, 1.7, 0, 0, 0)
 mesh = ExtResource("7_ftju0")
