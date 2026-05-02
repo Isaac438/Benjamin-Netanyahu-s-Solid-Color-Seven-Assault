@@ -22,6 +22,11 @@ func _input(event):
 			lean_state = 1
 
 func _process(delta):
+	var sprinting = Input.is_action_pressed("sprint")
+
+	if sprinting:
+		lean_state = 0  # cancel lean
+
 	target_lean = lean_state
 	lean_amount = lerp(lean_amount, target_lean, LEAN_SPEED * delta)
 	apply_lean()

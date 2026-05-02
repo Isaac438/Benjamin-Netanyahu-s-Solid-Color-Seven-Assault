@@ -15,8 +15,11 @@ const CROUCH_HEIGHT = 1.35
 
 var fire_timer := 0.0
 var bullet_scene = preload("res://scenes/tracer.tscn")
+var crouching := false
 
 func _input(event):
+	if event.is_action_pressed("c"):
+		crouching = !crouching
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * MOUSE_SENS)
 		camera.rotate_x(-event.relative.y * MOUSE_SENS)
@@ -37,30 +40,36 @@ func _do_teleport():
 
 	if spawn:
 		global_transform.origin = spawn.global_transform.origin
+		
+func crouch(delta):
+	collider.shape.height = CROUCH_HEIGHT
+	camera.position.y = lerp(camera.position.y, 1.0, 10 * delta)
+	
+func stand(delta):
+	collider.shape.height = STAND_HEIGHT
+	camera.position.y = lerp(camera.position.y, 1.6, 10 * delta)
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	var sprinting := Input.is_action_pressed("sprint")
+	if sprinting:
+		crouching = false
 	if not is_on_floor():
 		velocity += get_gravity() * delta * PI
 
 	if Input.is_action_pressed("space") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	var crouching: bool
-	if Input.is_action_pressed("c"):
-		collider.shape.height = CROUCH_HEIGHT
-		camera.position.y = lerp(camera.position.y, 1.0, 10 * delta)
+
+	if crouching:
+		crouch(delta)
 	else:
-		collider.shape.height = STAND_HEIGHT
-		camera.position.y = lerp(camera.position.y, 1.6, 10 * delta)
+		stand(delta)
 	var input_dir := Input.get_vector("a", "d", "w", "s")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction and Input.is_action_pressed("sprint"):
+	if direction and sprinting:
+		stand(delta)
 		velocity.x = direction.x * SPRINT_SPEED
 		velocity.z = direction.z * SPRINT_SPEED
-	elif direction and crouching:
-		velocity.x = direction.x * CROUCH_SPEED
-		velocity.z = direction.z * CROUCH_SPEED
-		collider.shape.height = CROUCH_HEIGHT
-		camera.position.y = lerp(camera.position.y, 1.0, 10 * delta)
 	elif direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
