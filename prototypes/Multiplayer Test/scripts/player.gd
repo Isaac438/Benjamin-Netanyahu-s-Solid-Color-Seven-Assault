@@ -36,8 +36,13 @@ func _do_teleport():
 
 	var map_root = get_tree().current_scene.find_child("MapRoot", true, false)
 	var map = map_root.get_child(0)
-	var spawn = map.find_child("SpawnPoint", true, false)
-
+	var spawns = map.find_children("*SpawnPoint*", "", true, false)
+	var spawn = spawns[randi_range(0, (spawns.size()-1))]
+	print(spawns.size())
+	
+	if spawn:
+		global_position = spawn.global_position
+		velocity = Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -86,9 +91,8 @@ func _process(delta):
 	if net_timer <= 0:
 		net.send_position(player_id, global_position)
 		net_timer = 0.05 # 20 updates/sec
+		
 	global_position += move * 5 * delta
-
-	
 	fire_timer -= delta
 
 	if Input.is_action_pressed("shoot") and fire_timer <= 0:

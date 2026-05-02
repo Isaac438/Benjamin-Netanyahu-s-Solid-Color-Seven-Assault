@@ -28,19 +28,22 @@ func _input(event):
 func _ready():
 	global.map_changed.connect(teleport)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-func teleport(new_map):
+func teleport(_new_map):
 	call_deferred("_do_teleport")
 func _do_teleport():
 	await get_tree().process_frame
 	await get_tree().process_frame  # important
 
-	var map_root = get_tree().current_scene.get_node("MapRoot")
+	var map_root = get_tree().current_scene.find_child("MapRoot", true, false)
 	var map = map_root.get_child(0)
-	var spawn = map.find_child("SpawnPoint", true, false)
-
+	var spawns = map.find_children("*SpawnPoint*", "", true, false)
+	var spawn = spawns[randi_range(0, (spawns.size()-1))]
+	print(spawns.size())
+	
 	if spawn:
-		global_transform.origin = spawn.global_transform.origin
-		
+		global_position = spawn.global_position
+		velocity = Vector3.ZERO
+
 func crouch(delta):
 	collider.shape.height = CROUCH_HEIGHT
 	camera.position.y = lerp(camera.position.y, 1.0, 10 * delta)

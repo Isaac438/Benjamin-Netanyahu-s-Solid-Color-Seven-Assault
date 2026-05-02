@@ -175,15 +175,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jyb13")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/StaticBody3D" unique_id=921006401]
 shape = SubResource("ConcavePolygonShape3D_lxgmk")
 
-[node name="SpawnPoint" type="Node3D" parent="." unique_id=1877540126]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.911316, 134.7604, -9.337653e-06)
-
-[node name="SpawnPoint2" type="Node3D" parent="." unique_id=394924490]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.94461, -121.043686, -2.0519205e-05)
-
-[node name="SpawnPoint3" type="Node3D" parent="." unique_id=1758147404]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.48547, -56.691025, -1.7706261e-05)
-
 [node name="Solitary Window2" type="MeshInstance3D" parent="." unique_id=1020878361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 34, 5)
 mesh = SubResource("BoxMesh_7ffev")
@@ -211,3 +202,14 @@ mesh = ExtResource("12_7ffev")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bom2/StaticBody3D" unique_id=706743410]
 shape = SubResource("ConcavePolygonShape3D_t1hxx")
+
+[node name="Spawns" type="Node3D" parent="." unique_id=1966961774]
+
+[node name="SpawnPoint" type="Node3D" parent="Spawns" unique_id=1877540126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.911316, 134.7604, -9.337653e-06)
+
+[node name="SpawnPoint2" type="Node3D" parent="Spawns" unique_id=394924490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.94461, -121.043686, -2.0519205e-05)
+
+[node name="SpawnPoint3" type="Node3D" parent="Spawns" unique_id=1758147404]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.48547, -56.691025, -1.7706261e-05)

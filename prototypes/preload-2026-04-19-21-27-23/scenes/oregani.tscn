@@ -140,9 +140,6 @@ script = ExtResource("3_3m67h")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 6/StaticBody3D" unique_id=1623926796]
 shape = SubResource("ConcavePolygonShape3D_134wl")
 
-[node name="SpawnPoint" type="Node3D" parent="." unique_id=1838271930]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.643234, 0, 0)
-
 [node name="Invis Barrier" type="MeshInstance3D" parent="." unique_id=1106556314]
 transform = Transform3D(3.5, 0, 0, 0, 2, 0, 0, 0, 1.7, 0, 0, 0)
 mesh = ExtResource("10_3m67h")
@@ -151,3 +148,8 @@ mesh = ExtResource("10_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Invis Barrier/StaticBody3D" unique_id=2052106461]
 shape = SubResource("ConcavePolygonShape3D_ila46")
+
+[node name="Spawns" type="Node3D" parent="." unique_id=608476602]
+
+[node name="SpawnPoint" type="Node3D" parent="Spawns" unique_id=1838271930 groups=["spawns"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.643234, 0, 0)

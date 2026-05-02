@@ -96,9 +96,6 @@ mesh = ExtResource("6_pqcow")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="bom2/StaticBody3D" unique_id=1121058209]
 shape = SubResource("ConcavePolygonShape3D_migvp")
 
-[node name="SpawnPoint" type="Node3D" parent="." unique_id=1770714646]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, 0)
-
 [node name="Invis Barrier" type="MeshInstance3D" parent="." unique_id=8772259]
 transform = Transform3D(3.3, 0, 0, 0, 1, 0, 0, 0, 1.7, 0, 0, 0)
 mesh = ExtResource("7_ftju0")
@@ -107,3 +104,8 @@ mesh = ExtResource("7_ftju0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Invis Barrier/StaticBody3D" unique_id=618611914]
 shape = SubResource("ConcavePolygonShape3D_perh5")
+
+[node name="Spawns" type="Node3D" parent="." unique_id=1491720408]
+
+[node name="SpawnPoint" type="Node3D" parent="Spawns" unique_id=1770714646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, 0)
