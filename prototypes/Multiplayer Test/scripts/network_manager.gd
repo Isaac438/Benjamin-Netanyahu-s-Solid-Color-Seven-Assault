@@ -1,54 +1,44 @@
 extends Node
 
-var players_node
+var my_id = str(OS.get_unique_id())
+var ws := WebSocketPeer.new()
+var players := {} # id -> node reference
+
 
 func _ready():
-	process_mode = Node.PROCESS_MODE_ALWAYS
-	multiplayer.peer_connected.connect(_on_peer_connected)
+	ws.connect_to_url("ws://127.0.0.1:8080")
 
-	await get_tree().process_frame
-	players_node = get_tree().current_scene.get_node("World/Players")
+func _process(delta):
+	ws.poll()
 
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_H:
-			host()
+	while ws.get_available_packet_count() > 0:
+		var msg = ws.get_packet().get_string_from_utf8()
+		var data = JSON.parse_string(msg)
 
-		if event.keycode == KEY_J:
-			join("127.0.0.1")
-			
+		handle_packet(data)
 
-func host():
-	if multiplayer.multiplayer_peer:
-		multiplayer.multiplayer_peer.close()
-		multiplayer.multiplayer_peer = null
+func spawn_remote_player(id):
+	var player_scene = preload("res://scenes/player.tscn")
+	var p = player_scene.instantiate()
+	get_tree().current_scene.add_child(p)
 
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(7777)
-	multiplayer.multiplayer_peer = peer
+	players[id] = p
 
-	# spawn server player
-	spawn_player.rpc(multiplayer.get_unique_id())
+func send_position(id, pos: Vector3):
+	ws.send_text(JSON.stringify({
+		"type": "update",
+		"id": id,
+		"pos": [pos.x, pos.y, pos.z]
+	}))
 
-func join(ip):
-	print("Joining...")
-	if multiplayer.multiplayer_peer:
-		multiplayer.multiplayer_peer.close()
-		multiplayer.multiplayer_peer = null
+func handle_packet(data):
+	if data["type"] == "update":
+		var id = data["id"]
+		if id == my_id:
+			return
+		var pos = Vector3(data["pos"][0], data["pos"][1], data["pos"][2])
 
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(ip, 7777)
-	multiplayer.multiplayer_peer = peer
+		if not players.has(id):
+			spawn_remote_player(id)
 
-func _on_peer_connected(id):
-	print("peer connected", id)
-	if multiplayer.is_server():
-		spawn_player(id)
-
-@rpc("authority", "call_local")
-func spawn_player(id):
-	var player = preload("res://scenes/player.tscn").instantiate()
-	player.name = str(id)
-
-	players_node.add_child(player)
-	player.set_multiplayer_authority(id)
+		players[id].global_position = pos

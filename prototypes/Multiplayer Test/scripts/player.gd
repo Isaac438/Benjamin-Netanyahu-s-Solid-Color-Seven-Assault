@@ -13,6 +13,8 @@ const STAND_HEIGHT = 1.8
 const CROUCH_HEIGHT = 1.35
 @export var FIRE_RATE = 0.2  # seconds between shots
 
+var just_teleported := true
+var net_timer := 0.0
 var fire_timer := 0.0
 var bullet_scene = preload("res://scenes/tracer.tscn")
 
@@ -27,6 +29,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func teleport(_new_map):
 	call_deferred("_do_teleport")
+	just_teleported = true
 func _do_teleport():
 	await get_tree().process_frame
 	await get_tree().process_frame  # important
@@ -35,16 +38,15 @@ func _do_teleport():
 	var map = map_root.get_child(0)
 	var spawn = map.find_child("SpawnPoint", true, false)
 
-	if spawn:
-		global_transform.origin = spawn.global_transform.origin
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta * PI
+		velocity += get_gravity() * delta
 
 	if Input.is_action_pressed("space") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	var crouching: bool
+	var crouching := Input.is_action_pressed("KEY_C")
 	if Input.is_action_pressed("c"):
 		collider.shape.height = CROUCH_HEIGHT
 		camera.position.y = lerp(camera.position.y, 1.0, 10 * delta)
@@ -76,6 +78,17 @@ func _on_death_plane_body_entered(body: Node3D) -> void:
 		get_tree().reload_current_scene()
 	
 func _process(delta):
+	if just_teleported:
+		return
+	var move = Vector3()
+	net_timer -= delta
+	
+	if net_timer <= 0:
+		net.send_position(player_id, global_position)
+		net_timer = 0.05 # 20 updates/sec
+	global_position += move * 5 * delta
+
+	
 	fire_timer -= delta
 
 	if Input.is_action_pressed("shoot") and fire_timer <= 0:
@@ -89,3 +102,8 @@ func shoot():
 	bullet.global_position = camera.global_position
 	bullet.direction = -camera.global_transform.basis.z
 	bullet.add_collision_exception_with(self)
+
+# Send data to network manager
+@onready var net = get_node("/root/Main/NetworkManager")
+
+var player_id = str(OS.get_unique_id())
