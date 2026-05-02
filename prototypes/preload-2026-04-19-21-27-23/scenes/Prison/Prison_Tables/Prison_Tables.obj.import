@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dvgp6obertsvm"
+path="res://.godot/imported/Prison_Tables.obj-7f4d89540489846348ef1ab39249220d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Prison_Tables.obj-7f4d89540489846348ef1ab39249220d.mesh"]
+
+source_file="res://scenes/Prison/Prison_Tables/Prison_Tables.obj"
+dest_files=["res://.godot/imported/Prison_Tables.obj-7f4d89540489846348ef1ab39249220d.mesh", "res://.godot/imported/Prison_Tables.obj-7f4d89540489846348ef1ab39249220d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
