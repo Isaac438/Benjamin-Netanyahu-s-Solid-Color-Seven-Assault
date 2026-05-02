@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiplayer WebSocket Client</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #121212; color: #f1f1f1; margin: 0; padding: 20px; }
+    .panel { max-width: 760px; margin: 0 auto; }
+    textarea, input { width: 100%; box-sizing: border-box; margin: 6px 0; padding: 10px; border-radius: 6px; border: 1px solid #444; background: #1f1f1f; color: #f1f1f1; }
+    button { padding: 10px 16px; border: none; border-radius: 6px; background: #2979ff; color: white; cursor: pointer; }
+    button:disabled { background: #444; cursor: not-allowed; }
+    .log { height: 250px; overflow-y: auto; background: #0f0f0f; border: 1px solid #333; padding: 12px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>Multiplayer WebSocket Client</h1>
+    <p>Connects to the server at the same host and port, then sends/receives simple messages.</p>
+    <div>
+      <button id="connectBtn">Connect</button>
+      <button id="disconnectBtn" disabled>Disconnect</button>
+    </div>
+    <div>
+      <input id="chatInput" type="text" placeholder="Type a chat message..." disabled />
+      <button id="sendBtn" disabled>Send Chat</button>
+    </div>
+    <div>
+      <button id="stateBtn" disabled>Send State Update</button>
+    </div>
+    <div class="log" id="log"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
