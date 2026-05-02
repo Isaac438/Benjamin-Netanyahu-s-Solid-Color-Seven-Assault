@@ -7,23 +7,16 @@ const crypto = require("crypto");
 
 const app = express();
 const port = process.env.PORT || 3000;
-const publicPath = path.join(__dirname, "public");
 const godotPath = path.join(__dirname, "godot");
-
-// Check if Godot export exists
 const godotIndex = path.join(godotPath, "index.html");
-const hasGodotExport = fs.existsSync(godotIndex);
 
-// Serve from godot if export exists, otherwise public
-const staticPath = hasGodotExport ? godotPath : publicPath;
-app.use(express.static(staticPath));
+app.use(express.static(godotPath));
 
 app.get("/", (req, res) => {
-  const indexPath = path.join(staticPath, "index.html");
-  if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath);
+  if (fs.existsSync(godotIndex)) {
+    res.sendFile(godotIndex);
   } else {
-    res.send("No game export found. Please export your Godot game to HTML5 and place files in server/godot/");
+    res.status(200).sendFile(path.join(godotPath, "index.html"));
   }
 });
 
