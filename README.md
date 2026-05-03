@@ -10,7 +10,7 @@ We should probaly change the name if we actually wanna release this\
 
 Jobs so far:\
 Alex - Setting up stuff in godot\
-Jayden - Git? idk maybe helping with godot\
+Jayden - maltiployer maybe helping with godot\
 Isaac - designing maps or maybe characters in blender\
 Pablo - designing characters and stuff in blender\
 Anyone else - record voice lines and create character ideas
