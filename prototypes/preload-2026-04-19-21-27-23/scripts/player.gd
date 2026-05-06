@@ -13,6 +13,7 @@ const STAND_HEIGHT = 1.8
 const CROUCH_HEIGHT = 1.35
 @export var FIRE_RATE = 0.2  # seconds between shots
 
+var hp := 100
 var fire_timer := 0.0
 var bullet_scene = preload("res://scenes/tracer.tscn")
 var crouching := false
@@ -86,7 +87,13 @@ func _physics_process(delta: float) -> void:
 func _on_death_plane_body_entered(body: Node3D) -> void:
 	if body == self:
 		get_tree().reload_current_scene()
-	
+
+func die():
+	hp -= 10
+	if hp == 0:
+		teleport(1)
+		hp = 100
+
 func _process(delta):
 	fire_timer -= delta
 
