@@ -6,7 +6,7 @@ var players := {} # id -> node reference
 
 
 func _ready():
-	ws.connect_to_url("ws://127.0.0.1:8080")
+	ws.connect_to_url("ws://127.0.0.1:3000")
 
 func _process(delta):
 	ws.poll()
