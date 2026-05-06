@@ -18,7 +18,7 @@ Anyone else - record voice lines and create character ideas
 # How to use git:
 Git downloads the entire github repo onto your computer and can update it with new files. to download all files, use these commands:\
 cd /c/wherever/you/want/it/\
-git clone https://github.com/Isaac438/Benjamin-Netanyahu-s-Solid-Color-Seven-Siege  
+git clone https://github.com/Isaac438/Benjamin-Netanyahu-s-Solid-Color-Seven-Assault  
 
 After using these commands you can download by using:\
 git pull
