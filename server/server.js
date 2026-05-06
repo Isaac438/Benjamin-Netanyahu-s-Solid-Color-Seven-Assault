@@ -7,8 +7,8 @@ const crypto = require("crypto");
 
 const app = express();
 const port = process.env.PORT || 3000;
-const godotPath = path.join(__dirname, "godot");
-const godotIndex = path.join(godotPath, "index.html");
+const godotPath = path.join(__dirname, "..", "BNSC7A Web");
+const godotIndex = path.join(godotPath, "MultiplayerCompiled.html");
 
 app.use(express.static(godotPath));
 
