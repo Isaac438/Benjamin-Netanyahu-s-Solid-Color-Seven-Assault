@@ -8,10 +8,16 @@ func _ready():
 	queue_free()
 
 func _physics_process(delta):
-	var motion = direction * speed * delta
-	var collision = move_and_collide(motion)
-	if collision:
-		var body = collision.get_collider()
+	var from = global_position
+	var to = from + direction * speed * delta
+	var space = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [self]  # optional: ignore the bullet itself
+	var result = space.intersect_ray(query)
+	if result:
+		var body = result.collider
 		if body.has_method("die"):
 			body.die()
 		queue_free()
+	else:
+		global_position = to
