@@ -3,26 +3,53 @@ extends CharacterBody3D
 var speed = 200.0
 var direction = Vector3.ZERO
 
-func ready():
-	await get_tree().create_timer(3).timeout
-	queue_free()
-
-
-func _physics_process(delta: float) -> void:
+#<<<<<<< HEAD
+#
+#func ready():
+	#await get_tree().create_timer(3).timeout
+	#queue_free()
+#
+#
+#func _physics_process(delta: float) -> void:
+	#var from = global_position
+	#var to = from + direction * speed * delta
+	#var space = get_world_3d().direct_space_state
+	#var query = PhysicsRayQueryParameters3D.create(from, to)
+	#query.exclude = [self]  # optional: ignore the bullet itself
+	#var result = space.intersect_ray(query)
+#
+	#if result:
+		#var body = result.collider
+		#if body.has_method("die"):
+			#body.die()
+			#queue_free()
+		#elif body.has_method("puncture"):
+			#body.puncture(direction)
+		#else:
+			#queue_free()
+	#else:
+		#global_position = to
+#=======
+func _physics_process(delta):
+	# Send data to network manager
+	var net = get_node("/root/Main/NetworkManager")
 	var from = global_position
 	var to = from + direction * speed * delta
+	
 	var space = get_world_3d().direct_space_state
+	
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]  # optional: ignore the bullet itself
+	
 	var result = space.intersect_ray(query)
-
 	if result:
 		var body = result.collider
 		if body.has_method("die"):
 			body.die()
+			net.send_hit(body.get_path())
 			queue_free()
 		elif body.has_method("puncture"):
-			body.puncture(direction)
+			body.puncture(global_position)
 		else:
 			queue_free()
 	else:
