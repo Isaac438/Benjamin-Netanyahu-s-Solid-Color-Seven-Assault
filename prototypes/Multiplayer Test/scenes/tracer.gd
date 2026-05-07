@@ -13,12 +13,13 @@ func _physics_process(delta):
 	query.exclude = [self]  # optional: ignore the bullet itself
 	
 	var result = space.intersect_ray(query)
-	
+	var net = get_node("res://scenes/NetworkManager")
 	if result:
 		var body = result.collider
 	
 		if body.has_method("die"):
 			body.die()
+			net.send_hit(body.get_path())
 			queue_free()
 		elif body.has_method("puncture"):
 			body.puncture(global_position)
