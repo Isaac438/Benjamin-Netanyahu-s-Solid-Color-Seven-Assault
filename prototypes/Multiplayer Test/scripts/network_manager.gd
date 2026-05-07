@@ -32,6 +32,8 @@ func send_position(id, pos: Vector3):
 	}))
 
 func send_hit(target_path):
+	if target_path.has_method("die"):
+		target_path.die()
     ws.send_text(JSON.stringify({
         "type": "hit",
         "target": str(target_path)
