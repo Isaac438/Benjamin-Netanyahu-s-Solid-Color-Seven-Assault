@@ -31,6 +31,12 @@ func send_position(id, pos: Vector3):
 		"pos": [pos.x, pos.y, pos.z]
 	}))
 
+func send_hit(target_path):
+    ws.send_text(JSON.stringify({
+        "type": "hit",
+        "target": str(target_path)
+    }))
+
 func handle_packet(data):
 	if data["type"] == "update":
 		var id = data["id"]
