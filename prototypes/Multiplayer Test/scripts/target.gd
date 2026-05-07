@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends StaticBody3D
 var health = 10
 func die():
 	health -= 10

@@ -25,12 +25,22 @@ func spawn_remote_player(id):
 	players[id] = p
 
 func send_position(id, pos: Vector3):
+	if ws.get_ready_state() != WebSocketPeer.STATE_OPEN:
+		return
+
 	ws.send_text(JSON.stringify({
 		"type": "update",
 		"id": id,
 		"pos": [pos.x, pos.y, pos.z]
 	}))
-
+func send_hit(target_path):
+	if ws.get_ready_state() != WebSocketPeer.STATE_OPEN:
+		return
+		
+	ws.send_text(JSON.stringify({
+		"type": "hit",
+		"target": str(target_path)
+	}))
 func handle_packet(data):
 	if data["type"] == "update":
 		var id = data["id"]

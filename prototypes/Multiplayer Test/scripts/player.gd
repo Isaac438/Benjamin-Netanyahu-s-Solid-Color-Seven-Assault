@@ -43,6 +43,7 @@ func _do_teleport():
 	if spawn:
 		global_position = spawn.global_position
 		velocity = Vector3.ZERO
+	just_teleported = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
