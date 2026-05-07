@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dybuf821h4emk"
+path="res://.godot/imported/Prison_Hard_Interior.obj-bdb8e9dc17487a740ad5a83b9eafd33c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Prison_Hard_Interior.obj-bdb8e9dc17487a740ad5a83b9eafd33c.mesh"]
+
+source_file="res://scenes/Prison/Prison_Hard_Interior/Prison_Hard_Interior.obj"
+dest_files=["res://.godot/imported/Prison_Hard_Interior.obj-bdb8e9dc17487a740ad5a83b9eafd33c.mesh", "res://.godot/imported/Prison_Hard_Interior.obj-bdb8e9dc17487a740ad5a83b9eafd33c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

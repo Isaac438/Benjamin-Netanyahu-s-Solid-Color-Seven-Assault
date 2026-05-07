@@ -47,7 +47,7 @@ func _do_teleport():
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta * 2.71828182845904523536
 
 	if Input.is_action_pressed("space") and is_on_floor():
 		velocity.y = JUMP_VELOCITY

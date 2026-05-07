@@ -70,75 +70,75 @@ shape = SubResource("ConcavePolygonShape3D_tsm1f")
 [node name="Soft Walls" type="Node3D" parent="." unique_id=1078802097]
 transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
 
-[node name="Soft Walls 0" type="MeshInstance3D" parent="Soft Walls" unique_id=56275548]
-mesh = ExtResource("2_522gv")
-skeleton = NodePath("../..")
+[node name="Soft Walls 0" type="StaticBody3D" parent="Soft Walls" unique_id=1973000858]
 script = ExtResource("3_3m67h")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Walls/Soft Walls 0" unique_id=1973000858]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 0/StaticBody3D" unique_id=1170097514]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 0" unique_id=1170097514]
 shape = SubResource("ConcavePolygonShape3D_522gv")
 
-[node name="Soft Walls 1" type="MeshInstance3D" parent="Soft Walls" unique_id=628895745]
-mesh = ExtResource("4_e8k14")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Walls/Soft Walls 0" unique_id=56275548]
+mesh = ExtResource("2_522gv")
+skeleton = NodePath("../../..")
+
+[node name="Soft Walls 1" type="StaticBody3D" parent="Soft Walls" unique_id=1716433377]
 script = ExtResource("3_3m67h")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Walls/Soft Walls 1" unique_id=1716433377]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 1/StaticBody3D" unique_id=1711000509]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 1" unique_id=1711000509]
 shape = SubResource("ConcavePolygonShape3D_3m67h")
 
-[node name="Soft Walls 2" type="MeshInstance3D" parent="Soft Walls" unique_id=1080733076]
-mesh = ExtResource("5_07ffs")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Walls/Soft Walls 1" unique_id=628895745]
+mesh = ExtResource("4_e8k14")
+skeleton = NodePath("../../..")
+
+[node name="Soft Walls 2" type="StaticBody3D" parent="Soft Walls" unique_id=727568486]
 script = ExtResource("3_3m67h")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Walls/Soft Walls 2" unique_id=727568486]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 2/StaticBody3D" unique_id=971495104]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 2" unique_id=971495104]
 shape = SubResource("ConcavePolygonShape3D_e8k14")
 
-[node name="Soft Walls 3" type="MeshInstance3D" parent="Soft Walls" unique_id=1429409855]
-mesh = ExtResource("6_oxlxf")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Walls/Soft Walls 2" unique_id=1080733076]
+mesh = ExtResource("5_07ffs")
+skeleton = NodePath("../../..")
+
+[node name="Soft Walls 3" type="StaticBody3D" parent="Soft Walls" unique_id=126987101]
 script = ExtResource("3_3m67h")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Walls/Soft Walls 3" unique_id=126987101]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 3/StaticBody3D" unique_id=662919974]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 3" unique_id=662919974]
 shape = SubResource("ConcavePolygonShape3D_07ffs")
 
-[node name="Soft Walls 4" type="MeshInstance3D" parent="Soft Walls" unique_id=1940259246]
-mesh = ExtResource("7_q8wuy")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Walls/Soft Walls 3" unique_id=1429409855]
+mesh = ExtResource("6_oxlxf")
+skeleton = NodePath("../../..")
+
+[node name="Soft Walls 4" type="StaticBody3D" parent="Soft Walls" unique_id=1040663745]
 script = ExtResource("3_3m67h")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Walls/Soft Walls 4" unique_id=1040663745]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 4/StaticBody3D" unique_id=1503717680]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 4" unique_id=1503717680]
 shape = SubResource("ConcavePolygonShape3D_oxlxf")
 
-[node name="Soft Walls 5" type="MeshInstance3D" parent="Soft Walls" unique_id=504244715]
-mesh = ExtResource("8_134wl")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Walls/Soft Walls 4" unique_id=1940259246]
+mesh = ExtResource("7_q8wuy")
+skeleton = NodePath("../../..")
+
+[node name="Soft Walls 5" type="StaticBody3D" parent="Soft Walls" unique_id=2038626167]
 script = ExtResource("3_3m67h")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Walls/Soft Walls 5" unique_id=2038626167]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 5/StaticBody3D" unique_id=1470463507]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 5" unique_id=1470463507]
 shape = SubResource("ConcavePolygonShape3D_q8wuy")
 
-[node name="Soft Walls 6" type="MeshInstance3D" parent="Soft Walls" unique_id=944039278]
-mesh = ExtResource("9_ila46")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Walls/Soft Walls 5" unique_id=504244715]
+mesh = ExtResource("8_134wl")
+skeleton = NodePath("../../..")
+
+[node name="Soft Walls 6" type="StaticBody3D" parent="Soft Walls" unique_id=2022409500]
 script = ExtResource("3_3m67h")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Walls/Soft Walls 6" unique_id=2022409500]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 6/StaticBody3D" unique_id=1623926796]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 6" unique_id=1623926796]
 shape = SubResource("ConcavePolygonShape3D_134wl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Walls/Soft Walls 6" unique_id=944039278]
+mesh = ExtResource("9_ila46")
+skeleton = NodePath("../../..")
 
 [node name="SpawnPoint" type="Node3D" parent="." unique_id=1838271930]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.643234, 0, 0)

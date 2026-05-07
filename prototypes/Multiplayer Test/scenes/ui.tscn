@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cjandbtdbvgfv" path="res://scenes/button_island.gd" id="2_wm3ai"]
 [ext_resource type="Script" uid="uid://dlrcirj1qmxh3" path="res://scenes/button_debug.gd" id="3_8dubc"]
 [ext_resource type="Script" uid="uid://dypg5slhnt58q" path="res://scripts/resume_button.gd" id="4_p7vwb"]
+[ext_resource type="Script" uid="uid://c6n5ab51l3ay8" path="res://scripts/button_prison.gd" id="4_wm3ai"]
 
 [node name="ui" type="CanvasLayer" unique_id=277036080]
 
@@ -36,6 +37,12 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Debug Map"
 script = ExtResource("3_8dubc")
+
+[node name="Button_prison" type="Button" parent="PauseMenu/VBoxContainer" unique_id=1450429187]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Prison"
+script = ExtResource("4_wm3ai")
 
 [node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer" unique_id=983046015]
 layout_mode = 2

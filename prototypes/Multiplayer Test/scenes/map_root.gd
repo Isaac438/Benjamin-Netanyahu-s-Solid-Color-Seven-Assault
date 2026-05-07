@@ -5,7 +5,8 @@ extends Node3D
 var maps = [
 	preload("res://scenes/oregani.tscn"),
 	preload("res://scenes/island.tscn"),
-	preload("res://scenes/debug_map.tscn")
+	preload("res://scenes/debug_map.tscn"),
+	preload("res://scenes/prison.tscn")
 ]
 
 var current_map: Node = null
