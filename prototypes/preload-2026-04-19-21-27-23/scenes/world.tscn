@@ -63,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.76293, 1, 24.843096)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.161993, 1, -13.250593)
 
 [node name="target9" parent="." unique_id=408550760 instance=ExtResource("2_rwgxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.229103, 1, -6.687113)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.749, 1, 0)
 
 [node name="target10" parent="." unique_id=1593290165 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.466557, 1.000001, 36.851013)

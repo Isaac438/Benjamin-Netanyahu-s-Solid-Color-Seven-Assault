@@ -118,35 +118,41 @@ mesh = ExtResource("5_lo4un")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tables/StaticBody3D" unique_id=1410231260]
 shape = SubResource("ConcavePolygonShape3D_xoe8d")
 
-[node name="Soft Wall 0" type="MeshInstance3D" parent="." unique_id=1151515863]
-mesh = ExtResource("6_7a0l7")
+[node name="Soft Wall 0" type="StaticBody3D" parent="." unique_id=1578518581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 14.5, 7.5)
 script = ExtResource("7_jdkhp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Wall 0" unique_id=1578518581]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 14.5, 7.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Wall 0/StaticBody3D" unique_id=270346273]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Wall 0" unique_id=270346273]
 shape = SubResource("BoxShape3D_jdkhp")
 
-[node name="Soft Wall 1" type="MeshInstance3D" parent="." unique_id=1305782711]
-mesh = ExtResource("7_8rh7k")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Wall 0" unique_id=1151515863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, -14.5, -7.5)
+mesh = ExtResource("6_7a0l7")
+skeleton = NodePath("../..")
+
+[node name="Soft Wall 1" type="StaticBody3D" parent="." unique_id=2122582805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5, -37.5, 5.5)
 script = ExtResource("7_jdkhp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Wall 1" unique_id=2122582805]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5, -37.5, 5.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Wall 1/StaticBody3D" unique_id=1848618831]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Wall 1" unique_id=1848618831]
 shape = SubResource("BoxShape3D_7ffev")
 
-[node name="Soft Wall 2" type="MeshInstance3D" parent="." unique_id=1264372147]
-mesh = ExtResource("8_crrps")
+[node name="Soft Wall 1" type="MeshInstance3D" parent="Soft Wall 1" unique_id=1305782711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.5, 37.5, -5.5)
+mesh = ExtResource("7_8rh7k")
+skeleton = NodePath("../..")
+
+[node name="Soft Wall 2" type="StaticBody3D" parent="." unique_id=539807351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.5, -90.5, 3.9999998)
 script = ExtResource("7_jdkhp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Soft Wall 2" unique_id=539807351]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.5, -90.5, 4)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Wall 2/StaticBody3D" unique_id=1661752052]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Wall 2" unique_id=1661752052]
 shape = SubResource("BoxShape3D_yncto")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Wall 2" unique_id=1264372147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.5, 90.5, -3.9999998)
+mesh = ExtResource("8_crrps")
+skeleton = NodePath("../..")
 
 [node name="Solitary Bed" type="MeshInstance3D" parent="." unique_id=453354915]
 mesh = ExtResource("9_cq30r")
