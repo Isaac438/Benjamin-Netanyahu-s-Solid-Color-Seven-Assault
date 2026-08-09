@@ -22,6 +22,16 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 
 global="*uid://d2b71bxano53q"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/borderless=true
+window/subwindows/embed_subwindows=false
+window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
+window/vsync/vsync_mode=0
+
 [input]
 
 w={
@@ -109,3 +119,7 @@ KEY_C={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"key_label":0,"unicode":99,"location":0,"echo":false,"script":null)
 ]
 }
+
+[xr]
+
+shaders/enabled=true

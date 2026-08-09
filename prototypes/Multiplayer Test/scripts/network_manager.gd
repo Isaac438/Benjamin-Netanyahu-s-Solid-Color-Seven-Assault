@@ -1,57 +1,58 @@
-extends Node
+extends HTTPRequest
 
-var my_id = str(OS.get_unique_id())
-var ws := WebSocketPeer.new()
-var players := {} # id -> node reference
+var server_url = "http://" + global.server_ip + ":8000"
+var timer = 0.0
+@onready var local_player = get_node("/root/Main/player")
+func _process(delta: float) -> void:
+	timer+=delta
+	if timer == 1.0:
+		if global.joining == true:
+			join_server(global.username, local_player.global_position)
+			timer = 0.0
+			global.joining = false
 
+func join_server(player_name: String, position: Vector3):
+	var server_url = "http://" + global.server_ip + ":8000"
+	var data = JSON.stringify({
+		"name": player_name,
+		"position": {
+			"x": position.x,
+			"y": position.y,
+			"z": position.z
+		}
+	})
 
-func _ready():
-	ws.connect_to_url("ws://127.0.0.1:3000")
+	request(
+		server_url + "/join",
+		["Content-Type: application/json"],
+		HTTPClient.METHOD_POST,
+		data
+	)
+func _on_http_request_request_completed(
+	result: int,
+	response_code: int,
+	headers: PackedStringArray,
+	body: PackedByteArray
+) -> void:
 
-func _process(delta):
-	ws.poll()
+	var response = JSON.parse_string(body.get_string_from_utf8())
+	if response.has("id"):
+		global.my_id = response["id"]
+	print(response)
+	
+func send_position(id, pos):
+	pass
 
-	while ws.get_available_packet_count() > 0:
-		var msg = ws.get_packet().get_string_from_utf8()
-		var data = JSON.parse_string(msg)
+func send_hit(path):
+	pass
 
-		handle_packet(data)
+func add_player():
+	var player = {
+		"id": global.next_player_id,
+		#"name": player_name
+	}
 
-func spawn_remote_player(id):
-	var player_scene = preload("res://scenes/player.tscn")
-	var p = player_scene.instantiate()
-	get_tree().current_scene.add_child(p)
+	global.players.append(player)
+	global.next_player_id += 1
 
-	players[id] = p
-
-func send_position(id, pos: Vector3):
-	if ws.get_ready_state() != WebSocketPeer.STATE_OPEN:
-		return
-
-	ws.send_text(JSON.stringify({
-		"type": "update",
-		"id": id,
-		"pos": [pos.x, pos.y, pos.z]
-	}))
-
-func send_hit(target_path):
-	if ws.get_ready_state() != WebSocketPeer.STATE_OPEN:
-		return
-	if target_path.has_method("die"):
-		target_path.die()
-	ws.send_text(JSON.stringify({
-		"type": "hit",
-		"target": str(target_path)
-	}))
-
-func handle_packet(data):
-	if data["type"] == "update":
-		var id = data["id"]
-		if id == my_id:
-			return
-		var pos = Vector3(data["pos"][0], data["pos"][1], data["pos"][2])
-
-		if not players.has(id):
-			spawn_remote_player(id)
-
-		players[id].global_position = pos
+	return player["id"]

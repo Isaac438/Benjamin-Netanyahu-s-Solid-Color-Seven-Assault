@@ -16,6 +16,9 @@ func _physics_process(delta):
 	var result = space.intersect_ray(query)
 	if result:
 		var body = result.collider
+
+		if body.has_method("puncture"):
+			body.puncture(result.position, direction)
 		if body.has_method("die"):
 			body.die()
 		queue_free()

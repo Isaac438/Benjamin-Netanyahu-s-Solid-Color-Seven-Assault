@@ -26,24 +26,6 @@ data = PackedVector3Array(100, 0, 100, -100, 0, 100, 100, 0, -100, -100, 0, 100,
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_522gv"]
 data = PackedVector3Array(37, -33, 0, 37, -33, 20, 37, -13, 20, 37, -33, 0, 36, -33, 0, 37, -33, 20, 37, -13, 0, 37, -33, 0, 37, -13, 20, 36, -33, 0, 36, -33, 20, 37, -33, 20, 37, -33, 20, 36, -33, 20, 37, -13, 20, 37, -13, 0, 37, -13, 20, 36, -13, 20, 36, -33, 20, 36, -13, 20, 37, -13, 20, 37, -13, 0, 36, -13, 0, 37, -33, 0, 36, -13, 0, 36, -33, 0, 37, -33, 0, 36, -13, 0, 37, -13, 0, 36, -13, 20, 36, -33, 0, 36, -13, 0, 36, -33, 20, 36, -13, 0, 36, -13, 20, 36, -33, 20)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3m67h"]
-data = PackedVector3Array(25, 1, 0, 25, 1, 20, 25, 35, 20, 25, 1, 0, 24, 1, 0, 25, 1, 20, 25, 35, 0, 25, 1, 0, 25, 35, 20, 24, 1, 0, 24, 1, 20, 25, 1, 20, 25, 1, 20, 24, 1, 20, 25, 35, 20, 25, 35, 0, 25, 35, 20, 24, 35, 20, 24, 1, 20, 24, 35, 20, 25, 35, 20, 25, 35, 0, 24, 35, 0, 25, 1, 0, 24, 35, 0, 24, 1, 0, 25, 1, 0, 24, 35, 0, 25, 35, 0, 24, 35, 20, 24, 1, 0, 24, 35, 0, 24, 1, 20, 24, 35, 0, 24, 35, 20, 24, 1, 20)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e8k14"]
-data = PackedVector3Array(12, -16, 0, 12, -16, 20, 12, -15, 20, 12, -16, 0, -1, -16, 0, 12, -16, 20, 12, -15, 0, 12, -16, 0, 12, -15, 20, -1, -16, 0, -1, -16, 20, 12, -16, 20, 12, -16, 20, -1, -16, 20, 12, -15, 20, 12, -15, 0, 12, -15, 20, -1, -15, 20, -1, -16, 20, -1, -15, 20, 12, -15, 20, 12, -15, 0, -1, -15, 0, 12, -16, 0, -1, -15, 0, -1, -16, 0, 12, -16, 0, -1, -15, 0, 12, -15, 0, -1, -15, 20, -1, -16, 0, -1, -15, 0, -1, -16, 20, -1, -15, 0, -1, -15, 20, -1, -16, 20)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_07ffs"]
-data = PackedVector3Array(10, 0, 0, 10, 0, 20, 10, 1, 20, 10, 0, 0, -10, 0, 0, 10, 0, 20, 10, 1, 0, 10, 0, 0, 10, 1, 20, -10, 0, 0, -10, 0, 20, 10, 0, 20, 10, 0, 20, -10, 0, 20, 10, 1, 20, 10, 1, 0, 10, 1, 20, -10, 1, 20, -10, 0, 20, -10, 1, 20, 10, 1, 20, 10, 1, 0, -10, 1, 0, 10, 0, 0, -10, 1, 0, -10, 0, 0, 10, 0, 0, -10, 1, 0, 10, 1, 0, -10, 1, 20, -10, 0, 0, -10, 1, 0, -10, 0, 20, -10, 1, 0, -10, 1, 20, -10, 0, 20)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_oxlxf"]
-data = PackedVector3Array(13, 36, 0, 13, 36, 20, 13, 37, 20, 13, 36, 0, -7, 36, 0, 13, 36, 20, 13, 37, 0, 13, 36, 0, 13, 37, 20, -7, 36, 0, -7, 36, 20, 13, 36, 20, 13, 36, 20, -7, 36, 20, 13, 37, 20, 13, 37, 0, 13, 37, 20, -7, 37, 20, -7, 36, 20, -7, 37, 20, 13, 37, 20, 13, 37, 0, -7, 37, 0, 13, 36, 0, -7, 37, 0, -7, 36, 0, 13, 36, 0, -7, 37, 0, 13, 37, 0, -7, 37, 20, -7, 36, 0, -7, 37, 0, -7, 36, 20, -7, 37, 0, -7, 37, 20, -7, 36, 20)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q8wuy"]
-data = PackedVector3Array(-1, -37, 0, -1, -37, 20, -1, -36, 20, -1, -37, 0, -22, -37, 0, -1, -37, 20, -1, -36, 0, -1, -37, 0, -1, -36, 20, -22, -37, 0, -22, -37, 20, -1, -37, 20, -1, -37, 20, -22, -37, 20, -1, -36, 20, -1, -36, 0, -1, -36, 20, -22, -36, 20, -22, -37, 20, -22, -36, 20, -1, -36, 20, -1, -36, 0, -22, -36, 0, -1, -37, 0, -22, -36, 0, -22, -37, 0, -1, -37, 0, -22, -36, 0, -1, -36, 0, -22, -36, 20, -22, -37, 0, -22, -36, 0, -22, -37, 20, -22, -36, 0, -22, -36, 20, -22, -37, 20)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_134wl"]
-data = PackedVector3Array(-10, -8, 0, -10, -8, 20, -10, 10, 20, -10, -8, 0, -11, -8, 0, -10, -8, 20, -10, 10, 0, -10, -8, 0, -10, 10, 20, -11, -8, 0, -11, -8, 20, -10, -8, 20, -10, -8, 20, -11, -8, 20, -10, 10, 20, -10, 10, 0, -10, 10, 20, -11, 10, 20, -11, -8, 20, -11, 10, 20, -10, 10, 20, -10, 10, 0, -11, 10, 0, -10, -8, 0, -11, 10, 0, -11, -8, 0, -10, -8, 0, -11, 10, 0, -10, 10, 0, -11, 10, 20, -11, -8, 0, -11, 10, 0, -11, -8, 20, -11, 10, 0, -11, 10, 20, -11, -8, 20)
-
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ila46"]
 data = PackedVector3Array(-28.0166, 0, 56.0333, 28.0166, 0, 56.0333, -28.0166, 28.0166, 56.0333, -28.0166, 28.0166, 56.0333, 28.0166, 0, 56.0333, 28.0166, 28.0166, 56.0333, -28.0166, 0, -56.0333, -28.0166, 0, 56.0333, -28.0166, 28.0166, -56.0333, -28.0166, 28.0166, -56.0333, -28.0166, 0, 56.0333, -28.0166, 28.0166, 56.0333, 28.0166, 0, 56.0333, 28.0166, 0, -56.0333, 28.0166, 28.0166, 56.0333, 28.0166, 28.0166, 56.0333, 28.0166, 0, -56.0333, 28.0166, 28.0166, -56.0333, 28.0166, 0, -56.0333, -28.0166, 0, -56.0333, 28.0166, 28.0166, -56.0333, 28.0166, 28.0166, -56.0333, -28.0166, 0, -56.0333, -28.0166, 28.0166, -56.0333)
 
@@ -76,69 +58,76 @@ script = ExtResource("3_3m67h")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 0" unique_id=1170097514]
 shape = SubResource("ConcavePolygonShape3D_522gv")
 
-[node name="Soft Walls 0" type="MeshInstance3D" parent="Soft Walls/Soft Walls 0" unique_id=56275548]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Soft Walls/Soft Walls 0" unique_id=1307540055]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Soft Walls/Soft Walls 0/CSGCombiner3D" unique_id=854110905]
 mesh = ExtResource("2_522gv")
-skeleton = NodePath("../../..")
 
-[node name="Soft Walls 1" type="StaticBody3D" parent="Soft Walls" unique_id=1716433377]
+[node name="Soft Walls 1" type="StaticBody3D" parent="Soft Walls" unique_id=673134298]
 script = ExtResource("3_3m67h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 1" unique_id=1711000509]
-shape = SubResource("ConcavePolygonShape3D_3m67h")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 1" unique_id=765609675]
+shape = SubResource("ConcavePolygonShape3D_522gv")
 
-[node name="Soft Walls 1" type="MeshInstance3D" parent="Soft Walls/Soft Walls 1" unique_id=628895745]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Soft Walls/Soft Walls 1" unique_id=439850499]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Soft Walls/Soft Walls 1/CSGCombiner3D" unique_id=1058023376]
 mesh = ExtResource("4_e8k14")
-skeleton = NodePath("../../..")
 
-[node name="Soft Walls 2" type="StaticBody3D" parent="Soft Walls" unique_id=727568486]
+[node name="Soft Walls 2" type="StaticBody3D" parent="Soft Walls" unique_id=402033814]
 script = ExtResource("3_3m67h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 2" unique_id=971495104]
-shape = SubResource("ConcavePolygonShape3D_e8k14")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 2" unique_id=1449279128]
+shape = SubResource("ConcavePolygonShape3D_522gv")
 
-[node name="Soft Walls 2" type="MeshInstance3D" parent="Soft Walls/Soft Walls 2" unique_id=1080733076]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Soft Walls/Soft Walls 2" unique_id=414852278]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Soft Walls/Soft Walls 2/CSGCombiner3D" unique_id=662897324]
 mesh = ExtResource("5_07ffs")
-skeleton = NodePath("../../..")
 
-[node name="Soft Walls 3" type="StaticBody3D" parent="Soft Walls" unique_id=126987101]
+[node name="Soft Walls 3" type="StaticBody3D" parent="Soft Walls" unique_id=1627651139]
 script = ExtResource("3_3m67h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 3" unique_id=662919974]
-shape = SubResource("ConcavePolygonShape3D_07ffs")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 3" unique_id=938458312]
+shape = SubResource("ConcavePolygonShape3D_522gv")
 
-[node name="Soft Walls 3" type="MeshInstance3D" parent="Soft Walls/Soft Walls 3" unique_id=1429409855]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Soft Walls/Soft Walls 3" unique_id=1183907730]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Soft Walls/Soft Walls 3/CSGCombiner3D" unique_id=1726323155]
 mesh = ExtResource("6_oxlxf")
-skeleton = NodePath("../../..")
 
-[node name="Soft Walls 4" type="StaticBody3D" parent="Soft Walls" unique_id=1040663745]
+[node name="Soft Walls 4" type="StaticBody3D" parent="Soft Walls" unique_id=434791673]
 script = ExtResource("3_3m67h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 4" unique_id=1503717680]
-shape = SubResource("ConcavePolygonShape3D_oxlxf")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 4" unique_id=1893694224]
+shape = SubResource("ConcavePolygonShape3D_522gv")
 
-[node name="Soft Walls 4" type="MeshInstance3D" parent="Soft Walls/Soft Walls 4" unique_id=1940259246]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Soft Walls/Soft Walls 4" unique_id=1742287606]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Soft Walls/Soft Walls 4/CSGCombiner3D" unique_id=42408075]
 mesh = ExtResource("7_q8wuy")
-skeleton = NodePath("../../..")
 
-[node name="Soft Walls 5" type="StaticBody3D" parent="Soft Walls" unique_id=2038626167]
+[node name="Soft Walls 5" type="StaticBody3D" parent="Soft Walls" unique_id=464990544]
 script = ExtResource("3_3m67h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 5" unique_id=1470463507]
-shape = SubResource("ConcavePolygonShape3D_q8wuy")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 5" unique_id=775924971]
+shape = SubResource("ConcavePolygonShape3D_522gv")
 
-[node name="Soft Walls 5" type="MeshInstance3D" parent="Soft Walls/Soft Walls 5" unique_id=504244715]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Soft Walls/Soft Walls 5" unique_id=863331436]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Soft Walls/Soft Walls 5/CSGCombiner3D" unique_id=2062206151]
 mesh = ExtResource("8_134wl")
-skeleton = NodePath("../../..")
 
-[node name="Soft Walls 6" type="StaticBody3D" parent="Soft Walls" unique_id=2022409500]
+[node name="Soft Walls 6" type="StaticBody3D" parent="Soft Walls" unique_id=160831659]
 script = ExtResource("3_3m67h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 6" unique_id=1623926796]
-shape = SubResource("ConcavePolygonShape3D_134wl")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 6" unique_id=791397186]
+shape = SubResource("ConcavePolygonShape3D_522gv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Soft Walls/Soft Walls 6" unique_id=944039278]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Soft Walls/Soft Walls 6" unique_id=1457739937]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Soft Walls/Soft Walls 6/CSGCombiner3D" unique_id=944394292]
 mesh = ExtResource("9_ila46")
-skeleton = NodePath("../../..")
 
 [node name="Invis Barrier" type="MeshInstance3D" parent="." unique_id=1106556314]
 transform = Transform3D(3.5, 0, 0, 0, 2, 0, 0, 0, 1.7, 0, 0, 0)

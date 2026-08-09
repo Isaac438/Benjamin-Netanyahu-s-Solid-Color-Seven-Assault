@@ -5,6 +5,11 @@
 [ext_resource type="Script" uid="uid://dlrcirj1qmxh3" path="res://scenes/button_debug.gd" id="3_8dubc"]
 [ext_resource type="Script" uid="uid://dypg5slhnt58q" path="res://scripts/resume_button.gd" id="4_p7vwb"]
 [ext_resource type="Script" uid="uid://c6n5ab51l3ay8" path="res://scripts/button_prison.gd" id="4_wm3ai"]
+[ext_resource type="Script" uid="uid://cum0hgevh348l" path="res://scripts/line_edit.gd" id="6_8dubc"]
+[ext_resource type="Script" uid="uid://b4i5e3rga30wi" path="res://scripts/button.gd" id="7_ktti3"]
+[ext_resource type="Script" uid="uid://dav8ch8njmhc3" path="res://scenes/label.gd" id="7_p7vwb"]
+[ext_resource type="Script" uid="uid://bpyjqn7kwe1sx" path="res://scripts/username_editor.gd" id="8_cgfq5"]
+[ext_resource type="Script" uid="uid://cfdgmacwhtddr" path="res://scripts/check_button.gd" id="9_7dvkv"]
 
 [node name="ui" type="CanvasLayer" unique_id=277036080]
 
@@ -49,3 +54,63 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Resume"
 script = ExtResource("4_p7vwb")
+
+[node name="LineEdit" type="LineEdit" parent="PauseMenu" unique_id=1033155430]
+layout_mode = 0
+offset_top = 614.0
+offset_right = 142.0
+offset_bottom = 645.0
+placeholder_text = "127.0.0.1"
+script = ExtResource("6_8dubc")
+
+[node name="Button" type="Button" parent="PauseMenu" unique_id=683384508]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 615.0
+offset_right = 179.0
+offset_bottom = 647.0
+text = "Join"
+script = ExtResource("7_ktti3")
+
+[node name="Label" type="Label" parent="PauseMenu" unique_id=1600436363]
+layout_mode = 0
+offset_left = 1546.0
+offset_top = 72.0
+offset_right = 1676.0
+offset_bottom = 96.0
+text = "username:"
+
+[node name="username editor" type="LineEdit" parent="PauseMenu" unique_id=1064715605]
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 71.0
+offset_right = 1856.0
+offset_bottom = 102.0
+script = ExtResource("8_cgfq5")
+
+[node name="Label2" type="Label" parent="PauseMenu" unique_id=1301755692]
+layout_mode = 0
+offset_left = 1546.0
+offset_top = 117.0
+offset_right = 1676.0
+offset_bottom = 141.0
+text = "VSync:"
+
+[node name="CheckButton" type="CheckButton" parent="PauseMenu" unique_id=1409554094]
+layout_mode = 0
+offset_left = 1719.0
+offset_top = 111.0
+offset_right = 1763.0
+offset_bottom = 135.0
+button_pressed = true
+script = ExtResource("9_7dvkv")
+
+[node name="Label" type="Label" parent="." unique_id=1587743950]
+offset_left = 1776.0
+offset_top = 26.0
+offset_right = 1882.0
+offset_bottom = 60.0
+script = ExtResource("7_p7vwb")
+
+[connection signal="text_changed" from="PauseMenu/LineEdit" to="PauseMenu/LineEdit" method="_on_text_changed"]
+[connection signal="text_changed" from="PauseMenu/username editor" to="PauseMenu/username editor" method="text_changed"]

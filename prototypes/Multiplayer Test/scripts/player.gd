@@ -11,7 +11,7 @@ const JUMP_VELOCITY = 4.5 * 2
 const MOUSE_SENS = 0.002
 const STAND_HEIGHT = 1.8
 const CROUCH_HEIGHT = 1.35
-@export var FIRE_RATE = 0.2  # seconds between shots
+@export var FIRE_RATE = 0.1  # seconds between shots
 
 var just_teleported := true
 var net_timer := 0.0

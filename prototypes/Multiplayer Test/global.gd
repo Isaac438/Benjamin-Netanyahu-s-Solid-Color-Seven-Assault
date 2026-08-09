@@ -1,7 +1,14 @@
 extends Node
 
+var players = []
+var next_player_id = 1
 var pause_menu: Control
-	
+var server_ip := "127.0.0.1"
+var fps_counter := true
+var my_id = null
+var joining = false
+var username = "67"
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -21,8 +28,6 @@ func set_map(value: int):
 		return
 	map = value
 	map_changed.emit(map)
-	
-
 
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
