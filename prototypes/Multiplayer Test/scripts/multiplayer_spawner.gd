@@ -3,15 +3,21 @@ extends MultiplayerSpawner
 @export var network_player: PackedScene
 
 func _ready() -> void:
-	multiplayer.peer_connected.connect(spawn_player)
+	pass
 
 
 func spawn_player(id: int) -> void:
-	if !multiplayer.is_server(): return
+	if !multiplayer.is_server():
+		return
 
-	var player: Node = network_player.instantiate()
+	# Don't spawn the same player twice.
+	var existing_player := get_node_or_null(spawn_path).get_node_or_null(str(id))
 
-	# Node name is synchronized through MultiplayerSpawner, we can use this to set authority to the player.
+	if existing_player:
+		return
+
+	var player := network_player.instantiate()
+
 	player.name = str(id)
 
-	get_node(spawn_path).add_child(player)
+	get_node(spawn_path).add_child(player, true)

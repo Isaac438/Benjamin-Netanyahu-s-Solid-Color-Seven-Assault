@@ -3,6 +3,9 @@ extends CharacterBody3D
 @onready var camera: Camera3D = $camera
 @onready var raycast: RayCast3D = $camera/RayCast3D
 @onready var collider = $CollisionShape3D
+@onready var bullet_spawner: MultiplayerSpawner = get_node("/root/Main/BulletSpawner")
+@export var max_health := 100
+@export var health := max_health
 
 const SPEED = 5.0
 const CROUCH_SPEED = 3.0
@@ -30,6 +33,29 @@ func _input(event):
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
+
+func take_damage(amount: int) -> void:
+	if !multiplayer.is_server():
+		return
+
+	health -= amount
+
+	print(name, " health: ", health)
+
+	if health <= 0:
+		die()
+
+func die() -> void:
+	if !multiplayer.is_server():
+		return
+
+	health = max_health
+
+	# Respawn instead of reloading the entire scene.
+	call_deferred("_respawn")
+
+func _respawn() -> void:
+	_do_teleport()
 
 func _ready():
 	if not is_multiplayer_authority():
@@ -128,7 +154,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_death_plane_body_entered(body: Node3D) -> void:
 	if body == self:
-		get_tree().reload_current_scene()
+		_respawn()
 	
 func _process(delta):
 	if just_teleported:
@@ -147,15 +173,23 @@ func _process(delta):
 		shoot()
 		fire_timer = FIRE_RATE
 
-func shoot():
-	var bullet = bullet_scene.instantiate()
-	get_tree().current_scene.add_child(bullet)
+func shoot() -> void:
+	request_shoot.rpc(
+		camera.global_position,
+		-camera.global_transform.basis.z
+	)
 
-	bullet.global_position = camera.global_position
-	bullet.direction = -camera.global_transform.basis.z
-	bullet.add_collision_exception_with(self)
+@rpc("any_peer", "reliable")
+func request_shoot(position: Vector3, direction: Vector3) -> void:
+	print("SERVER RECEIVED SHOOT")
 
-# Send data to network manager
+	if !multiplayer.is_server():
+		return
+
+	print("SERVER SPAWNING BULLET")
+
+	bullet_spawner.spawn({
+		"position": position,
+		"direction": direction
+	})
 @onready var net = get_node("/root/Main/NetworkManager")
-
-var player_id = str(OS.get_unique_id())

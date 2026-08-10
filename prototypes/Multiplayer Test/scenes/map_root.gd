@@ -1,8 +1,6 @@
 extends Node3D
 
-@onready var map_root = self
-
-var maps = [
+var maps := [
 	preload("res://scenes/oregani.tscn"),
 	preload("res://scenes/island.tscn"),
 	preload("res://scenes/debug_map.tscn"),
@@ -10,22 +8,46 @@ var maps = [
 ]
 
 var current_map: Node = null
+var current_map_id := 0
 
-func _ready():
-	global.map_changed.connect(_on_map_changed)
 
-	# load starting map
-	_on_map_changed(global.map)
+func _ready() -> void:
+	if multiplayer.is_server():
+		switch_to_map(0)
 
-func _on_map_changed(new_map: int):
-	switch_to_map(new_map)
 
-func switch_to_map(i: int):
+func switch_to_map(i: int) -> void:
 	if i < 0 or i >= maps.size():
 		return
 
 	if current_map:
 		current_map.queue_free()
+		await current_map.tree_exited
 
 	current_map = maps[i].instantiate()
-	map_root.add_child(current_map, true)
+	current_map.name = "CurrentMap"
+	add_child(current_map, true)
+
+	current_map_id = i
+	global.set_map(i)
+	global.map_changed.emit(i)
+
+
+@rpc("authority", "call_local", "reliable")
+func change_map(i: int) -> void:
+	if !multiplayer.is_server():
+		return
+
+	switch_to_map(i)
+
+
+@rpc("authority", "reliable")
+func send_current_map(i: int) -> void:
+	switch_to_map(i)
+
+
+func request_map_change(i: int) -> void:
+	if !multiplayer.is_server():
+		return
+
+	change_map.rpc(i)
