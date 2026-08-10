@@ -140,9 +140,6 @@ shape = SubResource("ConcavePolygonShape3D_134wl")
 mesh = ExtResource("9_ila46")
 skeleton = NodePath("../../..")
 
-[node name="SpawnPoint" type="Node3D" parent="." unique_id=1838271930]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.643234, 0, 0)
-
 [node name="Invis Barrier" type="MeshInstance3D" parent="." unique_id=1106556314]
 transform = Transform3D(3.5, 0, 0, 0, 2, 0, 0, 0, 1.7, 0, 0, 0)
 mesh = ExtResource("10_3m67h")
@@ -151,3 +148,21 @@ mesh = ExtResource("10_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Invis Barrier/StaticBody3D" unique_id=2052106461]
 shape = SubResource("ConcavePolygonShape3D_ila46")
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=1112512752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 44.94043)
+
+[node name="SpawnPoint2" type="Marker3D" parent="." unique_id=889770583]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.513098, 0, 44.94043)
+
+[node name="SpawnPoint3" type="Marker3D" parent="." unique_id=1651197109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.126263, 31.107975, 44.94043)
+
+[node name="SpawnPoint4" type="Marker3D" parent="." unique_id=1425131235]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.13984, 0, 44.94043)
+
+[node name="SpawnPoint5" type="Marker3D" parent="." unique_id=450259653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.708893, 0, 4.140316)
+
+[node name="SpawnPoint6" type="Marker3D" parent="." unique_id=2017988737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 26.402447)

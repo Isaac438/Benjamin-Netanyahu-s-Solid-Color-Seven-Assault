@@ -69,7 +69,7 @@ offset_left = 143.0
 offset_top = 615.0
 offset_right = 179.0
 offset_bottom = 647.0
-text = "Join"
+text = "Join Server"
 script = ExtResource("7_ktti3")
 
 [node name="Label" type="Label" parent="PauseMenu" unique_id=1600436363]
@@ -105,6 +105,14 @@ offset_bottom = 135.0
 button_pressed = true
 script = ExtResource("9_7dvkv")
 
+[node name="start server bitton" type="Button" parent="PauseMenu" unique_id=308173347]
+layout_mode = 0
+offset_top = 653.0
+offset_right = 126.0
+offset_bottom = 690.0
+text = "Start Server"
+script = ExtResource("7_ktti3")
+
 [node name="Label" type="Label" parent="." unique_id=1587743950]
 offset_left = 1776.0
 offset_top = 26.0
@@ -113,4 +121,7 @@ offset_bottom = 60.0
 script = ExtResource("7_p7vwb")
 
 [connection signal="text_changed" from="PauseMenu/LineEdit" to="PauseMenu/LineEdit" method="_on_text_changed"]
+[connection signal="button_down" from="PauseMenu/Button" to="PauseMenu/Button" method="_pressed"]
+[connection signal="pressed" from="PauseMenu/Button" to="PauseMenu/Button" method="_on_client_pressed"]
 [connection signal="text_changed" from="PauseMenu/username editor" to="PauseMenu/username editor" method="text_changed"]
+[connection signal="pressed" from="PauseMenu/start server bitton" to="PauseMenu/start server bitton" method="_on_server_pressed"]

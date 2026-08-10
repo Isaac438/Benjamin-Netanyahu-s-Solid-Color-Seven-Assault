@@ -19,7 +19,7 @@ func _physics_process(delta):
 		var body = result.collider
 		if body.has_method("die"):
 			body.die()
-			net.send_hit(body.get_path())
+			#net.send_hit(body.get_path())
 			queue_free()
 		elif body.has_method("puncture"):
 			body.puncture(global_position)

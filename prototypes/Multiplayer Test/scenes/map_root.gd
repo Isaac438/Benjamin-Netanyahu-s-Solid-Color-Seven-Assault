@@ -28,4 +28,4 @@ func switch_to_map(i: int):
 		current_map.queue_free()
 
 	current_map = maps[i].instantiate()
-	map_root.add_child(current_map)
+	map_root.add_child(current_map, true)

@@ -1,58 +1,21 @@
-extends HTTPRequest
+# network_manager.gd
+extends Node # Changed from HTTPRequest if you aren't using HTTP anymore
 
-var server_url = "http://" + global.server_ip + ":8000"
-var timer = 0.0
-@onready var local_player = get_node("/root/Main/player")
-func _process(delta: float) -> void:
-	timer+=delta
-	if timer == 1.0:
-		if global.joining == true:
-			join_server(global.username, local_player.global_position)
-			timer = 0.0
-			global.joining = false
-
-func join_server(player_name: String, position: Vector3):
-	var server_url = "http://" + global.server_ip + ":8000"
-	var data = JSON.stringify({
-		"name": player_name,
-		"position": {
-			"x": position.x,
-			"y": position.y,
-			"z": position.z
-		}
-	})
-
-	request(
-		server_url + "/join",
-		["Content-Type: application/json"],
-		HTTPClient.METHOD_POST,
-		data
-	)
-func _on_http_request_request_completed(
-	result: int,
-	response_code: int,
-	headers: PackedStringArray,
-	body: PackedByteArray
-) -> void:
-
-	var response = JSON.parse_string(body.get_string_from_utf8())
-	if response.has("id"):
-		global.my_id = response["id"]
-	print(response)
+const PORT: int = 42096
+var peer: ENetMultiplayerPeer
+@onready var spawner: MultiplayerSpawner = get_node("/root/Main/MultiplayerSpawner")
+func start_server() -> void:
+	peer = ENetMultiplayerPeer.new()
+	peer.create_server(PORT)
+	multiplayer.multiplayer_peer = peer
+	print("Server started")
 	
-func send_position(id, pos):
-	pass
+	# The host is peer ID 1. They need a player spawned for them manually:
+	# (Replace $MultiplayerSpawner with the real path to your spawner node)
+	spawner.spawn_player(1) 
 
-func send_hit(path):
-	pass
-
-func add_player():
-	var player = {
-		"id": global.next_player_id,
-		#"name": player_name
-	}
-
-	global.players.append(player)
-	global.next_player_id += 1
-
-	return player["id"]
+func start_client() -> void:
+	peer = ENetMultiplayerPeer.new()
+	peer.create_client(global.server_ip, PORT) # Don't hardcode localhost
+	multiplayer.multiplayer_peer = peer
+	print("Client connecting...")

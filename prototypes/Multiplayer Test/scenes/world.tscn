@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cbohu124gd1n4" path="res://scenes/map_root.gd" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://ck7xevw0q045e" path="res://scenes/ui.tscn" id="4_k0juu"]
 [ext_resource type="Script" uid="uid://b83flc236njn" path="res://scripts/network_manager.gd" id="5_71j4m"]
+[ext_resource type="Script" uid="uid://dd67is8w1anig" path="res://scripts/multiplayer_spawner.gd" id="5_qfnet"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,9 +23,6 @@ tonemap_mode = 2
 size = Vector3(100, 1, 100)
 
 [node name="Main" type="Node3D" unique_id=1632457144]
-
-[node name="player" parent="." unique_id=457843126 instance=ExtResource("1_nnsk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.958916, 6.1308594, 0.65735245)
 
 [node name="World" type="Node3D" parent="." unique_id=281029279]
 
@@ -94,7 +92,15 @@ script = ExtResource("3_4wyf3")
 
 [node name="ui" parent="World" unique_id=277036080 instance=ExtResource("4_k0juu")]
 
-[node name="NetworkManager" type="HTTPRequest" parent="." unique_id=828403113]
+[node name="NetworkManager" type="Node" parent="." unique_id=1040793200]
 script = ExtResource("5_71j4m")
 
-[connection signal="body_entered" from="World/death plane" to="player" method="_on_death_plane_body_entered"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1460217409]
+_spawnable_scenes = PackedStringArray("uid://dkpdqwad7aylg")
+spawn_path = NodePath("..")
+script = ExtResource("5_qfnet")
+network_player = ExtResource("1_nnsk1")
+
+[node name="MapSpawner" type="MultiplayerSpawner" parent="." unique_id=197408163]
+_spawnable_scenes = PackedStringArray("uid://bvllxe1sa4wiv", "uid://dkigtmrqvw3id", "uid://3l6t7820c85p", "uid://dmj52w4u6lqv1")
+spawn_path = NodePath("../World/MapRoot")
