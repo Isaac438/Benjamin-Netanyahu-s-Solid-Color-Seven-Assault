@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "start": "cd server && npm start",
-    "dev": "cd server && npm run dev"
-  },
-  "dependencies": {
-    "dotenv": "^17.4.2"
-  }
-}
