@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var bullet_spawner: MultiplayerSpawner = get_node("/root/Main/BulletSpawner")
 @export var max_health := 100
 @export var health := max_health
+@export var bullet_spawn_distance := 5.0
 
 const SPEED = 5.0
 const CROUCH_SPEED = 3.0
@@ -156,17 +157,10 @@ func _on_death_plane_body_entered(body: Node3D) -> void:
 	if body == self:
 		_respawn()
 	
-func _process(delta):
-	if just_teleported:
+func _process(delta: float) -> void:
+	if !is_multiplayer_authority():
 		return
-	var move = Vector3()
-	net_timer -= delta
-	
-	if net_timer <= 0:
-		#net.send_position(player_id, global_position)
-		net_timer = 0.05 # 20 updates/sec
-		
-	global_position += move * 5 * delta
+
 	fire_timer -= delta
 
 	if Input.is_action_pressed("shoot") and fire_timer <= 0:
@@ -174,19 +168,21 @@ func _process(delta):
 		fire_timer = FIRE_RATE
 
 func shoot() -> void:
+	var direction := -camera.global_transform.basis.z
+	var spawn_position := camera.global_position + direction * bullet_spawn_distance
+
 	request_shoot.rpc(
-		camera.global_position,
-		-camera.global_transform.basis.z
+		spawn_position,
+		direction
 	)
 
-@rpc("any_peer", "reliable")
-func request_shoot(position: Vector3, direction: Vector3) -> void:
-	print("SERVER RECEIVED SHOOT")
 
+@rpc("any_peer", "call_local", "reliable")
+func request_shoot(position: Vector3, direction: Vector3) -> void:
 	if !multiplayer.is_server():
 		return
 
-	print("SERVER SPAWNING BULLET")
+	print("Server received shot from: ", name)
 
 	bullet_spawner.spawn({
 		"position": position,

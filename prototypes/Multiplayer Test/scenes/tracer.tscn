@@ -19,6 +19,14 @@ material = SubResource("StandardMaterial3D_o68uk")
 radius = 0.005
 height = 0.01
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o68uk"]
+properties/0/path = NodePath(".:direction")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:speed")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="tracer" type="CharacterBody3D" unique_id=1416816809]
 script = ExtResource("1_o68uk")
 
@@ -29,3 +37,6 @@ shape = SubResource("SphereShape3D_o68uk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1314489560]
 transform = Transform3D(-4.371139e-07, -10, 0, 10, -4.371139e-07, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("SphereMesh_6pimm")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=32497812]
+replication_config = SubResource("SceneReplicationConfig_o68uk")

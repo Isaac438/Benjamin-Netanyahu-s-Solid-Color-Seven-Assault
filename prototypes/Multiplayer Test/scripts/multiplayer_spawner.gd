@@ -3,7 +3,7 @@ extends MultiplayerSpawner
 @export var network_player: PackedScene
 
 func _ready() -> void:
-	pass
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func spawn_player(id: int) -> void:

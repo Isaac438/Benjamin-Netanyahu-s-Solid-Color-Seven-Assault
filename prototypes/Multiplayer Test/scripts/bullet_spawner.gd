@@ -1,6 +1,6 @@
 extends MultiplayerSpawner
 
-@export var bullet_scene: PackedScene
+var bullet_scene := preload("res://scenes/tracer.tscn")
 
 
 func _ready() -> void:
@@ -8,9 +8,9 @@ func _ready() -> void:
 
 
 func _spawn_bullet(data: Dictionary) -> Node:
-	var bullet := bullet_scene.instantiate()
+	var bullet = bullet_scene.instantiate()
 
-	bullet.global_position = data["position"]
+	bullet.position = data["position"]
 	bullet.direction = data["direction"]
 
 	return bullet

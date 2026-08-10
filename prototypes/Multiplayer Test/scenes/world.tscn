@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://b83flc236njn" path="res://scripts/network_manager.gd" id="5_71j4m"]
 [ext_resource type="Script" uid="uid://dd67is8w1anig" path="res://scripts/multiplayer_spawner.gd" id="5_qfnet"]
 [ext_resource type="Script" uid="uid://caavg0yr77j1x" path="res://scripts/bullet_spawner.gd" id="7_i7141"]
-[ext_resource type="PackedScene" uid="uid://dmenbdsvahwlb" path="res://scenes/tracer.tscn" id="8_4mrxx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -106,4 +105,3 @@ network_player = ExtResource("1_nnsk1")
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="." unique_id=309791062]
 spawn_path = NodePath("..")
 script = ExtResource("7_i7141")
-bullet_scene = ExtResource("8_4mrxx")

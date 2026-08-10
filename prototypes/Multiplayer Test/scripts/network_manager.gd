@@ -7,6 +7,8 @@ var peer: ENetMultiplayerPeer
 @onready var spawner: MultiplayerSpawner = get_node("/root/Main/MultiplayerSpawner")
 @onready var map_root: Node3D = get_node("/root/Main/World/MapRoot")
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func start_server() -> void:
 	peer = ENetMultiplayerPeer.new()
@@ -46,12 +48,10 @@ func _on_peer_connected(id: int) -> void:
 
 	spawner.spawn_player(id)
 
-	# Tell the new client which map we're currently on.
 	map_root.send_current_map.rpc_id(
 		id,
 		map_root.current_map_id
 	)
-
 
 func _on_peer_disconnected(id: int) -> void:
 	print("Peer disconnected: ", id)

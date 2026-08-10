@@ -12,6 +12,7 @@ var current_map_id := 0
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	if multiplayer.is_server():
 		switch_to_map(0)
 
@@ -19,6 +20,8 @@ func _ready() -> void:
 func switch_to_map(i: int) -> void:
 	if i < 0 or i >= maps.size():
 		return
+
+	print("Switching local map to: ", i)
 
 	if current_map:
 		current_map.queue_free()
@@ -30,12 +33,29 @@ func switch_to_map(i: int) -> void:
 
 	current_map_id = i
 	global.set_map(i)
-	global.map_changed.emit(i)
+
+
+func request_map_change(i: int) -> void:
+	if !multiplayer.is_server():
+		return
+
+	if i < 0 or i >= maps.size():
+		return
+
+	# The server changes its own map.
+	switch_to_map(i)
+
+	# Tell every client to change theirs.
+	change_map.rpc(i)
 
 
 @rpc("authority", "call_local", "reliable")
 func change_map(i: int) -> void:
-	if !multiplayer.is_server():
+	print("RPC: changing map to ", i)
+
+	# The server already changed its map above.
+	# Clients execute this function.
+	if multiplayer.is_server():
 		return
 
 	switch_to_map(i)
@@ -43,11 +63,5 @@ func change_map(i: int) -> void:
 
 @rpc("authority", "reliable")
 func send_current_map(i: int) -> void:
+	print("Received current map: ", i)
 	switch_to_map(i)
-
-
-func request_map_change(i: int) -> void:
-	if !multiplayer.is_server():
-		return
-
-	change_map.rpc(i)
