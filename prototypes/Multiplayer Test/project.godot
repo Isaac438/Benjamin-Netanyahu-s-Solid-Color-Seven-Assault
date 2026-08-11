@@ -121,6 +121,10 @@ KEY_C={
 ]
 }
 
+[rendering]
+
+occlusion_culling/use_occlusion_culling=true
+
 [xr]
 
 shaders/enabled=true
