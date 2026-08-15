@@ -2,22 +2,36 @@ extends MultiplayerSpawner
 
 @export var network_player: PackedScene
 
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
-
 func spawn_player(id: int) -> void:
-	if !multiplayer.is_server():
+	if not multiplayer.is_server():
 		return
 
-	# Don't spawn the same player twice.
-	var existing_player := get_node_or_null(spawn_path).get_node_or_null(str(id))
+	var spawn_root := get_node(spawn_path)
 
-	if existing_player:
+	if spawn_root.has_node(str(id)):
 		return
+
+	print("Spawning player ", id)
 
 	var player := network_player.instantiate()
-
 	player.name = str(id)
 
-	get_node(spawn_path).add_child(player, true)
+	spawn_root.add_child(player, true)
+
+	print(
+		"Player ",
+		id,
+		" added. Authority = ",
+		player.get_multiplayer_authority()
+	)
+
+	await get_tree().process_frame
+
+	if id == 1:
+		await player._do_teleport()
+	else:
+		player.request_spawn.rpc_id(id)

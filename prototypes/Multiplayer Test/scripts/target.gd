@@ -1,6 +1,17 @@
 extends StaticBody3D
-var health = 10
-func die():
-	health -= 10
-	if health<= 0:
-		self.queue_free()
+
+@export var health := 10
+
+func die(damage: int) -> void:
+	if not multiplayer.is_server():
+		return
+
+	health -= damage
+
+	if health <= 0:
+		destroy.rpc()
+
+
+@rpc("authority", "call_local", "reliable")
+func destroy() -> void:
+	queue_free()

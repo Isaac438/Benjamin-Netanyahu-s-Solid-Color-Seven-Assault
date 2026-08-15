@@ -4,10 +4,20 @@ extends CharacterBody3D
 @onready var raycast: RayCast3D = $camera/RayCast3D
 @onready var collider = $CollisionShape3D
 @onready var bullet_spawner: MultiplayerSpawner = get_node("/root/Main/BulletSpawner")
-@export var max_health := 100
-@export var health := max_health
-@export var bullet_spawn_distance := 5.0
+@onready var net = get_node("/root/Main/NetworkManager")
 
+@export var max_health := 100
+@export var health: int = 100
+@export var bullet_spawn_distance := 5.0
+@export var FIRE_RATE := 0.1
+
+var lean_state := 0
+var lean_amount := 0.0
+var target_lean := 0.0
+
+const LEAN_ANGLE = 15.0
+const LEAN_OFFSET = 0.3
+const LEAN_SPEED = 10.0
 const SPEED = 5.0
 const CROUCH_SPEED = 3.0
 const SPRINT_SPEED = 8.0
@@ -15,151 +25,280 @@ const JUMP_VELOCITY = 4.5 * 2
 const MOUSE_SENS = 0.002
 const STAND_HEIGHT = 1.8
 const CROUCH_HEIGHT = 1.35
-@export var FIRE_RATE = 0.1  # seconds between shots
 
 var just_teleported := true
-var net_timer := 0.0
 var fire_timer := 0.0
 var bullet_scene = preload("res://scenes/tracer.tscn")
 
-func _input(event):
-	# FIX: If we don't own this player, don't let our mouse rotate them!
-	if !is_multiplayer_authority(): 
-		return
-		
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		rotate_y(-event.relative.x * MOUSE_SENS)
-		camera.rotate_x(-event.relative.y * MOUSE_SENS)
-		camera.rotation.x = clampf(camera.rotation.x,-deg_to_rad(90), deg_to_rad(90))
-
-func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
-
-func take_damage(amount: int) -> void:
-	if !multiplayer.is_server():
+func _ready() -> void:
+	if not is_multiplayer_authority():
+		camera.current = false
 		return
 
-	health -= amount
+	global.map_changed.connect(teleport)
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	_initial_spawn()
+
+func _initial_spawn() -> void:
+	print(name, " starting initial spawn")
+
+	var map_root = get_node("/root/Main/World/MapRoot")
+
+	while map_root.current_map == null:
+		await get_tree().process_frame
+
+	await get_tree().process_frame
+
+	_do_teleport()
+
+func teleport(_new_map: int) -> void:
+	just_teleported = true
+	call_deferred("_do_teleport")
+	
+@rpc("any_peer", "reliable")
+func request_spawn() -> void:
+	if multiplayer.get_remote_sender_id() != 1:
+		return
+
+	if not is_multiplayer_authority():
+		return
+
+	print("Spawn request received by ", name)
+
+	await _do_teleport()
+	
+func _do_teleport() -> void:
+	var map_root = get_node("/root/Main/World/MapRoot")
+
+	print(name, " looking for current map")
+
+	while map_root.current_map == null:
+		await get_tree().process_frame
+
+	var map = map_root.current_map
+
+	print(name, " found map: ", map.name)
+
+	await get_tree().process_frame
+
+	var raw_spawns = map.find_children(
+		"*SpawnPoint*",
+		"",
+		true,
+		false
+	)
+
+	var valid_spawns := []
+
+	for node in raw_spawns:
+		if node is Node3D:
+			valid_spawns.append(node)
+
+	print(
+		name,
+		" found ",
+		valid_spawns.size(),
+		" spawn points"
+	)
+
+	if valid_spawns.is_empty():
+		print("WARNING: No spawn points found in ", map.name)
+		return
+
+	var spawn = valid_spawns[
+		randi_range(0, valid_spawns.size() - 1)
+	]
+
+	global_position = spawn.global_position
+	velocity = Vector3.ZERO
+	print("!!! HEALTH RESET BY _do_teleport !!!")
+	health = max_health
+
+	print(
+		name,
+		" spawned at ",
+		spawn.name,
+		" ",
+		spawn.global_position
+	)
+	
+func die(damage: int) -> void:
+	if not multiplayer.is_server():
+		return
+	print(
+	name,
+	" | server: ",
+	multiplayer.is_server(),
+	" | health: ",
+	health
+)
+	health -= damage
 
 	print(name, " health: ", health)
 
 	if health <= 0:
-		die()
+		print(name, " died")
 
-func die() -> void:
-	if !multiplayer.is_server():
+		health = max_health
+
+		var authority := get_multiplayer_authority()
+
+		if authority == multiplayer.get_unique_id():
+			respawn()
+		else:
+			respawn.rpc_id(authority)
+
+@rpc("any_peer", "reliable")
+func respawn() -> void:
+	if multiplayer.get_remote_sender_id() != 1 and multiplayer.get_unique_id() != 1:
 		return
+
+	if not is_multiplayer_authority():
+		return
+
+	print(name, " respawning")
 
 	health = max_health
+	velocity = Vector3.ZERO
 
-	# Respawn instead of reloading the entire scene.
-	call_deferred("_respawn")
+	await _do_teleport()
 
-func _respawn() -> void:
+func _input(event) -> void:
+	if not is_multiplayer_authority():
+		return
+
+	if event.is_action_pressed("e"):
+		if lean_state == -1:
+			lean_state = 0
+		else:
+			lean_state = -1
+
+	elif event.is_action_pressed("q"):
+		if lean_state == 1:
+			lean_state = 0
+		else:
+			lean_state = 1
+
+	if event is InputEventMouseMotion:
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			rotate_y(-event.relative.x * MOUSE_SENS)
+
+			camera.rotate_x(
+				-event.relative.y * MOUSE_SENS
+			)
+
+			camera.rotation.x = clampf(
+				camera.rotation.x,
+				-deg_to_rad(90),
+				deg_to_rad(90)
+			)
+
+func spawn_at_point() -> void:
+	if not is_multiplayer_authority():
+		return
+
+	print("spawn_at_point called for ", name)
+
 	_do_teleport()
 
-func _ready():
-	if not is_multiplayer_authority():
-		camera.current = false 
-		return
-		
-	if has_node("MultiplayerSynchronizer"):
-		await $MultiplayerSynchronizer.ready
-		$MultiplayerSynchronizer.set_multiplayer_authority(name.to_int())
-
-	global.map_changed.connect(teleport)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	# FIX: If we just spawned and can't find a map, wait for it!
-	call_deferred("initial_spawn_check")
-
-func initial_spawn_check():
-	var map_root = get_tree().current_scene.find_child("MapRoot", true, false)
-	
-	# If the map node doesn't exist yet, wait half a second and try again
-	if not map_root or map_root.get_child_count() == 0:
-		print("Client is waiting for world map to replicate...")
-		await get_tree().create_timer(0.5).timeout
-		initial_spawn_check() # Retry
-	else:
-		# Map exists! Safe to teleport to a spawn point
-		_do_teleport()
-
-func teleport(_new_map):
-	call_deferred("_do_teleport")
-	just_teleported = true
-func _do_teleport():
-	await get_tree().process_frame
-	await get_tree().process_frame # important
-	
-	var map_root = get_tree().current_scene.find_child("MapRoot", true, false)
-	if not map_root or map_root.get_child_count() == 0:
-		return
-		
-	var map = map_root.get_child(0)
-	
-	# Find children matching the wildcard pattern
-	var raw_spawns = map.find_children("*SpawnPoint*", "", true, false)
-	var valid_spawns = []
-	
-	# FILTER: Only keep actual 3D physical positions, ignore Spawns/Spawners
-	for node in raw_spawns:
-		if node is Node3D and not node is MultiplayerSpawner:
-			valid_spawns.append(node)
-			
-	print("Valid spawn points found: ", valid_spawns.size())
-	
-	if valid_spawns.size() > 0:
-		var spawn = valid_spawns[randi_range(0, (valid_spawns.size() - 1))]
-		global_position = spawn.global_position
-		velocity = Vector3.ZERO
-		just_teleported = false
-	else:
-		print("CRITICAL: No valid physical Node3D spawn points found!")
-
-
 func _physics_process(delta: float) -> void:
-	if !is_multiplayer_authority(): return
-	# Add the gravity.
+	if not is_multiplayer_authority():
+		return
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta * 2.71828182845904523536
 
 	if Input.is_action_pressed("space") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+
 	var crouching := Input.is_action_pressed("KEY_C")
+
 	if Input.is_action_pressed("c"):
 		collider.shape.height = CROUCH_HEIGHT
-		camera.position.y = lerp(camera.position.y, 1.0, 10 * delta)
+		camera.position.y = lerp(
+			camera.position.y,
+			1.0,
+			10 * delta
+		)
 	else:
 		collider.shape.height = STAND_HEIGHT
-		camera.position.y = lerp(camera.position.y, 1.6, 10 * delta)
-	var input_dir := Input.get_vector("a", "d", "w", "s")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		camera.position.y = lerp(
+			camera.position.y,
+			1.6,
+			10 * delta
+		)
+
+	var input_dir := Input.get_vector(
+		"a",
+		"d",
+		"w",
+		"s"
+	)
+
+	var direction := (
+		transform.basis *
+		Vector3(input_dir.x, 0, input_dir.y)
+	).normalized()
+
 	if direction and Input.is_action_pressed("sprint"):
 		velocity.x = direction.x * SPRINT_SPEED
 		velocity.z = direction.z * SPRINT_SPEED
+
 	elif direction and crouching:
 		velocity.x = direction.x * CROUCH_SPEED
 		velocity.z = direction.z * CROUCH_SPEED
+
 		collider.shape.height = CROUCH_HEIGHT
-		camera.position.y = lerp(camera.position.y, 1.0, 10 * delta)
+
+		camera.position.y = lerp(
+			camera.position.y,
+			1.0,
+			10 * delta
+		)
+
 	elif direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+
 	else:
 		velocity.x = 0
 		velocity.z = 0
-		
 
 	move_and_slide()
 
+func _enter_tree() -> void:
+	var id := name.to_int()
+
+	set_multiplayer_authority(id)
+
+	print(
+		"Player ",
+		name,
+		" authority = ",
+		get_multiplayer_authority(),
+		" local peer = ",
+		multiplayer.get_unique_id()
+	)
+
 func _on_death_plane_body_entered(body: Node3D) -> void:
-	if body == self:
-		_respawn()
-	
+	if body == self and multiplayer.is_server():
+		die(10000)
+
 func _process(delta: float) -> void:
-	if !is_multiplayer_authority():
+	if not is_multiplayer_authority():
 		return
+
+	target_lean = lean_state
+
+	lean_amount = lerp(
+		lean_amount,
+		target_lean,
+		LEAN_SPEED * delta
+	)
+
+	apply_lean()
 
 	fire_timer -= delta
 
@@ -167,9 +306,14 @@ func _process(delta: float) -> void:
 		shoot()
 		fire_timer = FIRE_RATE
 
+
 func shoot() -> void:
 	var direction := -camera.global_transform.basis.z
-	var spawn_position := camera.global_position + direction * bullet_spawn_distance
+
+	var spawn_position := (
+		camera.global_position +
+		direction * bullet_spawn_distance
+	)
 
 	request_shoot.rpc(
 		spawn_position,
@@ -177,9 +321,16 @@ func shoot() -> void:
 	)
 
 
+func apply_lean() -> void:
+	rotation_degrees.z = lean_amount * LEAN_ANGLE
+
+
 @rpc("any_peer", "call_local", "reliable")
-func request_shoot(position: Vector3, direction: Vector3) -> void:
-	if !multiplayer.is_server():
+func request_shoot(
+	position: Vector3,
+	direction: Vector3
+) -> void:
+	if not multiplayer.is_server():
 		return
 
 	print("Server received shot from: ", name)
@@ -188,4 +339,3 @@ func request_shoot(position: Vector3, direction: Vector3) -> void:
 		"position": position,
 		"direction": direction
 	})
-@onready var net = get_node("/root/Main/NetworkManager")

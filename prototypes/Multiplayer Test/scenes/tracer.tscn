@@ -40,3 +40,5 @@ mesh = SubResource("SphereMesh_6pimm")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=32497812]
 replication_config = SubResource("SceneReplicationConfig_o68uk")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=172937653]

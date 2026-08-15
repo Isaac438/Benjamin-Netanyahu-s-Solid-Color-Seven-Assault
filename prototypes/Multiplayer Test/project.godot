@@ -33,6 +33,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 window/vsync/vsync_mode=0
 
+[global_group]
+
+destructible=""
+
 [input]
 
 w={

@@ -1,28 +1,31 @@
 extends CharacterBody3D
 
 var direction := Vector3.ZERO
-
+@onready var net = get_node("/root/Main/NetworkManager")
 @export var speed := 100.0
 @export var lifetime := 5.0
-
+@onready var raycast: RayCast3D = $RayCast3D
 var life_timer := 0.0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	raycast.target_position = direction * 2.0
+	raycast.enabled = true
 
 func _physics_process(delta: float) -> void:
-	if !multiplayer.is_server():
-		return
-
 	velocity = direction * speed
 
-	var collision := move_and_collide(velocity * delta)
+	if multiplayer.is_server():
+		raycast.target_position = direction * (speed * delta)
+		raycast.force_raycast_update()
 
-	if collision:
-		print("Bullet hit: ", collision.get_collider())
-		queue_free()
+		if raycast.is_colliding():
+			var hit = raycast.get_collider()
 
-	life_timer += delta
+			if hit.is_in_group("destructible"):
+				net.request_damage(hit.get_path(), 25)
 
-	if life_timer >= lifetime:
-		queue_free()
+			queue_free()
+			return
+
+	move_and_slide()

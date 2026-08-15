@@ -35,6 +35,7 @@ func _ready() -> void:
 
 func set_map(value: int) -> void:
 	map = value
+	map_changed.emit(value)
 
 
 func _unhandled_input(event) -> void:
