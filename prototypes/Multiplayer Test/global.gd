@@ -31,7 +31,7 @@ func _ready() -> void:
 	if pause_menu:
 		pause_menu.visible = false
 		pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-
+	toggle_pause()
 
 func set_map(value: int) -> void:
 	map = value

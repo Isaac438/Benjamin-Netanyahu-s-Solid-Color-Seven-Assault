@@ -11,7 +11,6 @@ func die(damage: int) -> void:
 	if health <= 0:
 		destroy.rpc()
 
-
 @rpc("authority", "call_local", "reliable")
 func destroy() -> void:
 	queue_free()

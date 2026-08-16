@@ -86,6 +86,7 @@ offset_left = 1711.0
 offset_top = 71.0
 offset_right = 1856.0
 offset_bottom = 102.0
+placeholder_text = "67"
 script = ExtResource("8_cgfq5")
 
 [node name="Label2" type="Label" parent="PauseMenu" unique_id=1301755692]

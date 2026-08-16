@@ -2,9 +2,9 @@
 
 [ext_resource type="ArrayMesh" uid="uid://byqr6o1lcagf5" path="res://scenes/Oregani_Hard_Walls.obj" id="1_8rgex"]
 [ext_resource type="ArrayMesh" uid="uid://ckure3v0x7owe" path="res://scenes/Oregani Soft Walls/Soft_Walls0.obj" id="2_522gv"]
-[ext_resource type="Script" uid="uid://b4dcxwbhaje00" path="res://scenes/soft_walls.gd" id="3_3m67h"]
 [ext_resource type="ArrayMesh" uid="uid://bnpa2fpvl05id" path="res://scenes/Oregani Soft Walls/Soft_Walls1.obj" id="4_e8k14"]
 [ext_resource type="ArrayMesh" uid="uid://bqoi2uypr0gvo" path="res://scenes/Oregani Soft Walls/Soft_Walls2.obj" id="5_07ffs"]
+[ext_resource type="Script" uid="uid://krf3jdvmopsj" path="res://scripts/destructible.gd" id="6_3m67h"]
 [ext_resource type="ArrayMesh" uid="uid://b12vnp0xo2okr" path="res://scenes/Oregani Soft Walls/Soft_Walls3.obj" id="6_oxlxf"]
 [ext_resource type="ArrayMesh" uid="uid://c1o57gxy8f4ij" path="res://scenes/Oregani Soft Walls/Soft_Walls4.obj" id="7_q8wuy"]
 [ext_resource type="ArrayMesh" uid="uid://bvjdl3h0rbgow" path="res://scenes/Oregani Soft Walls/Soft_Walls5.obj" id="8_134wl"]
@@ -71,7 +71,7 @@ shape = SubResource("ConcavePolygonShape3D_tsm1f")
 transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
 
 [node name="Soft Walls 0" type="StaticBody3D" parent="Soft Walls" unique_id=1973000858 groups=["destructible"]]
-script = ExtResource("3_3m67h")
+script = ExtResource("6_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 0" unique_id=1170097514]
 shape = SubResource("ConcavePolygonShape3D_522gv")
@@ -81,7 +81,7 @@ mesh = ExtResource("2_522gv")
 skeleton = NodePath("../../..")
 
 [node name="Soft Walls 1" type="StaticBody3D" parent="Soft Walls" unique_id=1716433377 groups=["destructible"]]
-script = ExtResource("3_3m67h")
+script = ExtResource("6_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 1" unique_id=1711000509]
 shape = SubResource("ConcavePolygonShape3D_3m67h")
@@ -91,7 +91,7 @@ mesh = ExtResource("4_e8k14")
 skeleton = NodePath("../../..")
 
 [node name="Soft Walls 2" type="StaticBody3D" parent="Soft Walls" unique_id=727568486 groups=["destructible"]]
-script = ExtResource("3_3m67h")
+script = ExtResource("6_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 2" unique_id=971495104]
 shape = SubResource("ConcavePolygonShape3D_e8k14")
@@ -101,7 +101,7 @@ mesh = ExtResource("5_07ffs")
 skeleton = NodePath("../../..")
 
 [node name="Soft Walls 3" type="StaticBody3D" parent="Soft Walls" unique_id=126987101 groups=["destructible"]]
-script = ExtResource("3_3m67h")
+script = ExtResource("6_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 3" unique_id=662919974]
 shape = SubResource("ConcavePolygonShape3D_07ffs")
@@ -111,7 +111,7 @@ mesh = ExtResource("6_oxlxf")
 skeleton = NodePath("../../..")
 
 [node name="Soft Walls 4" type="StaticBody3D" parent="Soft Walls" unique_id=1040663745 groups=["destructible"]]
-script = ExtResource("3_3m67h")
+script = ExtResource("6_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 4" unique_id=1503717680]
 shape = SubResource("ConcavePolygonShape3D_oxlxf")
@@ -121,7 +121,7 @@ mesh = ExtResource("7_q8wuy")
 skeleton = NodePath("../../..")
 
 [node name="Soft Walls 5" type="StaticBody3D" parent="Soft Walls" unique_id=2038626167 groups=["destructible"]]
-script = ExtResource("3_3m67h")
+script = ExtResource("6_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 5" unique_id=1470463507]
 shape = SubResource("ConcavePolygonShape3D_q8wuy")
@@ -131,7 +131,7 @@ mesh = ExtResource("8_134wl")
 skeleton = NodePath("../../..")
 
 [node name="Soft Walls 6" type="StaticBody3D" parent="Soft Walls" unique_id=2022409500 groups=["destructible"]]
-script = ExtResource("3_3m67h")
+script = ExtResource("6_3m67h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Soft Walls/Soft Walls 6" unique_id=1623926796]
 shape = SubResource("ConcavePolygonShape3D_134wl")
@@ -156,7 +156,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 44.94043)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.513098, 0, 44.94043)
 
 [node name="SpawnPoint3" type="Marker3D" parent="." unique_id=1651197109]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.126263, 31.107975, 44.94043)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.702614, 0, 0)
 
 [node name="SpawnPoint4" type="Marker3D" parent="." unique_id=1425131235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.13984, 0, 44.94043)

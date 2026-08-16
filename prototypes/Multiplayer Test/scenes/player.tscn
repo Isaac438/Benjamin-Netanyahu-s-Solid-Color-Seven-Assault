@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://j1l8tdrphiph" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://b0fkyaxp61xgl" path="res://scenes/goo.tscn" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://q4s6trwgegsw" path="res://Untitled design.png" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://d3v8lo5bwrdcj" path="res://scripts/username.gd" id="4_dqkch"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 
@@ -55,6 +56,12 @@ mesh = SubResource("CapsuleMesh_onrkg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=518244195]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_i3pqv")
+
+[node name="username" type="Label3D" parent="." unique_id=1913241857]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.2788389, 0)
+visible = false
+text = "username"
+script = ExtResource("4_dqkch")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=448747308]
 replication_config = SubResource("SceneReplicationConfig_dqkch")

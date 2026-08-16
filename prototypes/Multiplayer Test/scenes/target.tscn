@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://cx6t3dkauh1qq"]
 
-[ext_resource type="Script" uid="uid://btfne0mvh2l2j" path="res://scripts/target.gd" id="1_b37e2"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2b72u"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_b37e2"]
@@ -15,7 +13,6 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="Target" type="StaticBody3D" unique_id=806554791 groups=["destructible"]]
-script = ExtResource("1_b37e2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1551315627]
 shape = SubResource("CapsuleShape3D_2b72u")

@@ -35,3 +35,4 @@ func spawn_player(id: int) -> void:
 		await player._do_teleport()
 	else:
 		player.request_spawn.rpc_id(id)
+		

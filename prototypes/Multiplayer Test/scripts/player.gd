@@ -8,7 +8,7 @@ extends CharacterBody3D
 
 @export var max_health := 100
 @export var health: int = 100
-@export var bullet_spawn_distance := 5.0
+@export var bullet_spawn_distance := 1.0
 @export var FIRE_RATE := 0.1
 
 var lean_state := 0
@@ -74,7 +74,7 @@ func _do_teleport() -> void:
 
 	print(name, " looking for current map")
 
-	while map_root.current_map == null:
+	while map_root.current_map == null or map_root.changing_map:
 		await get_tree().process_frame
 
 	var map = map_root.current_map
@@ -82,6 +82,10 @@ func _do_teleport() -> void:
 	print(name, " found map: ", map.name)
 
 	await get_tree().process_frame
+
+	if not is_instance_valid(map):
+		print("Map was freed before spawn!")
+		return
 
 	var raw_spawns = map.find_children(
 		"*SpawnPoint*",
@@ -93,7 +97,7 @@ func _do_teleport() -> void:
 	var valid_spawns := []
 
 	for node in raw_spawns:
-		if node is Node3D:
+		if node is Marker3D:
 			valid_spawns.append(node)
 
 	print(
@@ -113,7 +117,6 @@ func _do_teleport() -> void:
 
 	global_position = spawn.global_position
 	velocity = Vector3.ZERO
-	print("!!! HEALTH RESET BY _do_teleport !!!")
 	health = max_health
 
 	print(
@@ -204,67 +207,68 @@ func spawn_at_point() -> void:
 	_do_teleport()
 
 func _physics_process(delta: float) -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	if not is_multiplayer_authority():
 		return
 
 	if not is_on_floor():
-		velocity += get_gravity() * delta * 2.71828182845904523536
+		velocity += get_gravity() * delta * 3.0
+	if get_tree().paused == false:
+		if Input.is_action_pressed("space") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 
-	if Input.is_action_pressed("space") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		var crouching := Input.is_action_pressed("KEY_C")
 
-	var crouching := Input.is_action_pressed("KEY_C")
+		if Input.is_action_pressed("c"):
+			collider.shape.height = CROUCH_HEIGHT
+			camera.position.y = lerp(
+				camera.position.y,
+				1.0,
+				10 * delta
+			)
+		else:
+			collider.shape.height = STAND_HEIGHT
+			camera.position.y = lerp(
+				camera.position.y,
+				1.6,
+				10 * delta
+			)
 
-	if Input.is_action_pressed("c"):
-		collider.shape.height = CROUCH_HEIGHT
-		camera.position.y = lerp(
-			camera.position.y,
-			1.0,
-			10 * delta
-		)
-	else:
-		collider.shape.height = STAND_HEIGHT
-		camera.position.y = lerp(
-			camera.position.y,
-			1.6,
-			10 * delta
-		)
-
-	var input_dir := Input.get_vector(
-		"a",
-		"d",
-		"w",
-		"s"
-	)
-
-	var direction := (
-		transform.basis *
-		Vector3(input_dir.x, 0, input_dir.y)
-	).normalized()
-
-	if direction and Input.is_action_pressed("sprint"):
-		velocity.x = direction.x * SPRINT_SPEED
-		velocity.z = direction.z * SPRINT_SPEED
-
-	elif direction and crouching:
-		velocity.x = direction.x * CROUCH_SPEED
-		velocity.z = direction.z * CROUCH_SPEED
-
-		collider.shape.height = CROUCH_HEIGHT
-
-		camera.position.y = lerp(
-			camera.position.y,
-			1.0,
-			10 * delta
+		var input_dir := Input.get_vector(
+			"a",
+			"d",
+			"w",
+			"s"
 		)
 
-	elif direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		var direction := (
+			transform.basis *
+			Vector3(input_dir.x, 0, input_dir.y)
+		).normalized()
 
-	else:
-		velocity.x = 0
-		velocity.z = 0
+		if direction and Input.is_action_pressed("sprint"):
+			velocity.x = direction.x * SPRINT_SPEED
+			velocity.z = direction.z * SPRINT_SPEED
+
+		elif direction and crouching:
+			velocity.x = direction.x * CROUCH_SPEED
+			velocity.z = direction.z * CROUCH_SPEED
+
+			collider.shape.height = CROUCH_HEIGHT
+
+			camera.position.y = lerp(
+				camera.position.y,
+				1.0,
+				10 * delta
+			)
+
+		elif direction:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+
+		else:
+			velocity.x = 0
+			velocity.z = 0
 
 	move_and_slide()
 
@@ -289,7 +293,8 @@ func _on_death_plane_body_entered(body: Node3D) -> void:
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
-
+	if get_tree().paused:
+		return
 	target_lean = lean_state
 
 	lean_amount = lerp(
