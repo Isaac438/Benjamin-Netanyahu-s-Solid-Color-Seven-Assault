@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dav8ch8njmhc3" path="res://scenes/label.gd" id="7_p7vwb"]
 [ext_resource type="Script" uid="uid://bpyjqn7kwe1sx" path="res://scripts/username_editor.gd" id="8_cgfq5"]
 [ext_resource type="Script" uid="uid://cfdgmacwhtddr" path="res://scripts/check_button.gd" id="9_7dvkv"]
+[ext_resource type="Script" uid="uid://babny2b5fsfcn" path="res://scripts/quit_button.gd" id="10_vdcm2"]
 
 [node name="ui" type="CanvasLayer" unique_id=277036080]
 
@@ -114,6 +115,15 @@ offset_bottom = 690.0
 text = "Start Server"
 script = ExtResource("7_ktti3")
 
+[node name="QuitButton" type="Button" parent="PauseMenu" unique_id=1434544738]
+layout_mode = 0
+offset_left = 1778.0
+offset_top = 1029.0
+offset_right = 1918.0
+offset_bottom = 1080.0
+text = "Quit"
+script = ExtResource("10_vdcm2")
+
 [node name="Label" type="Label" parent="." unique_id=1587743950]
 offset_left = 1776.0
 offset_top = 26.0
@@ -126,3 +136,4 @@ script = ExtResource("7_p7vwb")
 [connection signal="pressed" from="PauseMenu/Button" to="PauseMenu/Button" method="_on_client_pressed"]
 [connection signal="text_changed" from="PauseMenu/username editor" to="PauseMenu/username editor" method="text_changed"]
 [connection signal="pressed" from="PauseMenu/start server bitton" to="PauseMenu/start server bitton" method="_on_server_pressed"]
+[connection signal="button_down" from="PauseMenu/QuitButton" to="PauseMenu/QuitButton" method="quit"]

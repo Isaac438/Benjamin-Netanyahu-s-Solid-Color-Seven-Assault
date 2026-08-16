@@ -1,7 +1,8 @@
 extends Label
 
 var time_passed: float = 0.0
-
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 func _process(delta: float) -> void:
 	if global.fps_counter == true:
 		time_passed += delta
