@@ -5,5 +5,5 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_text_changed(new_text: String) -> void:
-	global.server_ip = new_text
-	print("server_ip changed to ", new_text)
+	global.port = new_text
+	print("port changed to ", new_text)

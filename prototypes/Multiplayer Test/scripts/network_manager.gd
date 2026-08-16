@@ -1,6 +1,6 @@
 extends Node
 
-const PORT := 42096
+var PORT :int= global.port
 
 var peer: ENetMultiplayerPeer
 

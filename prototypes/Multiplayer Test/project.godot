@@ -22,6 +22,7 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 
 global="*uid://d2b71bxano53q"
 NetworkManager="*uid://b83flc236njn"
+Local="*uid://8r2x37u6oimk"
 
 [display]
 

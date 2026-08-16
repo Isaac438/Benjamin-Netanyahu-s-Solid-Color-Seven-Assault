@@ -56,12 +56,20 @@ size_flags_vertical = 3
 text = "Resume"
 script = ExtResource("4_p7vwb")
 
-[node name="LineEdit" type="LineEdit" parent="PauseMenu" unique_id=1033155430]
+[node name="ip" type="LineEdit" parent="PauseMenu" unique_id=1033155430]
 layout_mode = 0
 offset_top = 614.0
 offset_right = 142.0
 offset_bottom = 645.0
 placeholder_text = "127.0.0.1"
+script = ExtResource("6_8dubc")
+
+[node name="port" type="LineEdit" parent="PauseMenu" unique_id=684371733]
+layout_mode = 0
+offset_top = 647.0
+offset_right = 142.0
+offset_bottom = 678.0
+placeholder_text = "42069"
 script = ExtResource("6_8dubc")
 
 [node name="Button" type="Button" parent="PauseMenu" unique_id=683384508]
@@ -109,9 +117,9 @@ script = ExtResource("9_7dvkv")
 
 [node name="start server bitton" type="Button" parent="PauseMenu" unique_id=308173347]
 layout_mode = 0
-offset_top = 653.0
+offset_top = 682.0
 offset_right = 126.0
-offset_bottom = 690.0
+offset_bottom = 719.0
 text = "Start Server"
 script = ExtResource("7_ktti3")
 
@@ -124,14 +132,16 @@ offset_bottom = 1080.0
 text = "Quit"
 script = ExtResource("10_vdcm2")
 
-[node name="Label" type="Label" parent="." unique_id=1587743950]
+[node name="fps_counter" type="Label" parent="." unique_id=1587743950]
 offset_left = 1776.0
 offset_top = 26.0
 offset_right = 1882.0
 offset_bottom = 60.0
+text = "fps:"
 script = ExtResource("7_p7vwb")
 
-[connection signal="text_changed" from="PauseMenu/LineEdit" to="PauseMenu/LineEdit" method="_on_text_changed"]
+[connection signal="text_changed" from="PauseMenu/ip" to="PauseMenu/ip" method="_on_text_changed"]
+[connection signal="text_changed" from="PauseMenu/port" to="PauseMenu/port" method="_on_text_changed"]
 [connection signal="button_down" from="PauseMenu/Button" to="PauseMenu/Button" method="_pressed"]
 [connection signal="pressed" from="PauseMenu/Button" to="PauseMenu/Button" method="_on_client_pressed"]
 [connection signal="text_changed" from="PauseMenu/username editor" to="PauseMenu/username editor" method="text_changed"]

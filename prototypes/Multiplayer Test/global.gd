@@ -4,12 +4,12 @@ var players = []
 var next_player_id = 1
 
 var pause_menu: Control
-
+var port = 42069
 var server_ip := "127.0.0.1"
 var fps_counter := true
 var my_id = null
 var joining := false
-var username := "67"
+var usernames := {}
 
 var paused := false
 var map := 0
