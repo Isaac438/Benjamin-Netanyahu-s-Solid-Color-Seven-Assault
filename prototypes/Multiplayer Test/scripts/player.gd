@@ -273,6 +273,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _enter_tree() -> void:
+	add_to_group("players")
+
 	var id := name.to_int()
 
 	set_multiplayer_authority(id)
@@ -285,7 +287,6 @@ func _enter_tree() -> void:
 		" local peer = ",
 		multiplayer.get_unique_id()
 	)
-
 func _on_death_plane_body_entered(body: Node3D) -> void:
 	if body == self and multiplayer.is_server():
 		die(10000)

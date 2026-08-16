@@ -70,6 +70,7 @@ offset_top = 647.0
 offset_right = 142.0
 offset_bottom = 678.0
 placeholder_text = "42069"
+max_length = 5
 script = ExtResource("6_8dubc")
 
 [node name="Button" type="Button" parent="PauseMenu" unique_id=683384508]
@@ -144,6 +145,9 @@ script = ExtResource("7_p7vwb")
 [connection signal="text_changed" from="PauseMenu/port" to="PauseMenu/port" method="_on_text_changed"]
 [connection signal="button_down" from="PauseMenu/Button" to="PauseMenu/Button" method="_pressed"]
 [connection signal="pressed" from="PauseMenu/Button" to="PauseMenu/Button" method="_on_client_pressed"]
+[connection signal="pressed" from="PauseMenu/Button" to="PauseMenu/username editor" method="joined_server"]
+[connection signal="text_changed" from="PauseMenu/username editor" to="PauseMenu/username editor" method="_on_text_changed"]
 [connection signal="text_changed" from="PauseMenu/username editor" to="PauseMenu/username editor" method="text_changed"]
+[connection signal="pressed" from="PauseMenu/start server bitton" to="PauseMenu/username editor" method="joined_server"]
 [connection signal="pressed" from="PauseMenu/start server bitton" to="PauseMenu/start server bitton" method="_on_server_pressed"]
 [connection signal="button_down" from="PauseMenu/QuitButton" to="PauseMenu/QuitButton" method="quit"]

@@ -1,14 +1,11 @@
 extends Label3D
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	text = Local.username
+@onready var net = get_node("/root/Main/NetworkManager")
 
-var ticks = 0.0
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	ticks += delta
-	if ticks >= 2.0:
-		ticks = 0.0
-		if text != Local.username:
-			text = Local.username
+func _ready() -> void:
+	update_username()
+
+func update_username() -> void:
+	var player_id := get_parent().name.to_int()
+
+	text = net.players.get(player_id, "Player")

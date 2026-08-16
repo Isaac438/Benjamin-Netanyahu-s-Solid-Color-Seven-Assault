@@ -9,7 +9,7 @@ var server_ip := "127.0.0.1"
 var fps_counter := true
 var my_id = null
 var joining := false
-var usernames := {}
+var username = "67"
 
 var paused := false
 var map := 0
