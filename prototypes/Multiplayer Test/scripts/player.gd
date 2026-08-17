@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var camera: Camera3D = $camera
 @onready var raycast: RayCast3D = $camera/RayCast3D
 @onready var collider = $CollisionShape3D
+@onready var mesh = $MeshInstance3D
 @onready var bullet_spawner: MultiplayerSpawner = get_node("/root/Main/BulletSpawner")
 @onready var net = get_node("/root/Main/NetworkManager")
 
@@ -14,6 +15,8 @@ extends CharacterBody3D
 var lean_state := 0
 var lean_amount := 0.0
 var target_lean := 0.0
+var crouch_state := false
+var prone_state := false
 
 const LEAN_ANGLE = 15.0
 const LEAN_OFFSET = 0.3
@@ -21,6 +24,7 @@ const LEAN_SPEED = 10.0
 const SPEED = 5.0
 const CROUCH_SPEED = 3.0
 const SPRINT_SPEED = 8.0
+const PRONE_SPEED = 2.0
 const JUMP_VELOCITY = 4.5 * 2
 const MOUSE_SENS = 0.002
 const STAND_HEIGHT = 1.8
@@ -31,6 +35,7 @@ var fire_timer := 0.0
 var bullet_scene = preload("res://scenes/tracer.tscn")
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	if not is_multiplayer_authority():
 		camera.current = false
 		return
@@ -197,6 +202,18 @@ func _input(event) -> void:
 				-deg_to_rad(90),
 				deg_to_rad(90)
 			)
+			
+	if Input.is_action_pressed("c"):
+		if prone_state == true and crouch_state == false:
+			prone_state = false
+		crouch_state = !crouch_state
+		
+	if event.is_action_pressed("LEFT_CONTROL"):
+		if crouch_state == true and prone_state == false:
+			crouch_state = false
+		prone_state = !prone_state
+	
+	
 
 func spawn_at_point() -> void:
 	if not is_multiplayer_authority():
@@ -207,33 +224,56 @@ func spawn_at_point() -> void:
 	_do_teleport()
 
 func _physics_process(delta: float) -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
 	if not is_multiplayer_authority():
 		return
-
 	if not is_on_floor():
 		velocity += get_gravity() * delta * 3.0
 	if get_tree().paused == false:
 		if Input.is_action_pressed("space") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
-
-		var crouching := Input.is_action_pressed("KEY_C")
-
-		if Input.is_action_pressed("c"):
+			
+		elif crouch_state == true and prone_state == false:
 			collider.shape.height = CROUCH_HEIGHT
+			mesh.scale.y = CROUCH_HEIGHT / 2.0
 			camera.position.y = lerp(
 				camera.position.y,
 				1.0,
 				10 * delta
 			)
+			
+		elif prone_state == true and crouch_state == false:
+			collider.rotation.x = lerp(
+				collider.rotation.x,
+				-90.0,
+				10 * delta
+			)
+			
+			mesh.rotation.x = lerp(
+				collider.rotation.x,
+				-90.0,
+				10 * delta
+			)
+			
 		else:
 			collider.shape.height = STAND_HEIGHT
+			collider.rotation.x = lerp(
+				collider.rotation.x,
+				0.0,
+				10 * delta
+			)
+			
+			mesh.rotation.x = lerp(
+				collider.rotation.x,
+				0.0,
+				10 * delta
+			)
+			mesh.scale.y = 1.0
 			camera.position.y = lerp(
 				camera.position.y,
 				1.6,
 				10 * delta
 			)
-
+		
 		var input_dir := Input.get_vector(
 			"a",
 			"d",
@@ -245,22 +285,22 @@ func _physics_process(delta: float) -> void:
 			transform.basis *
 			Vector3(input_dir.x, 0, input_dir.y)
 		).normalized()
+		
+		if direction and prone_state:
+			velocity.x = direction.x * PRONE_SPEED
+			velocity.z = direction.z * PRONE_SPEED
 
-		if direction and Input.is_action_pressed("sprint"):
-			velocity.x = direction.x * SPRINT_SPEED
-			velocity.z = direction.z * SPRINT_SPEED
-
-		elif direction and crouching:
+		elif direction and Input.is_action_pressed("sprint") and crouch_state:
 			velocity.x = direction.x * CROUCH_SPEED
 			velocity.z = direction.z * CROUCH_SPEED
 
-			collider.shape.height = CROUCH_HEIGHT
+		elif direction and Input.is_action_pressed("sprint"):
+			velocity.x = direction.x * SPRINT_SPEED
+			velocity.z = direction.z * SPRINT_SPEED
 
-			camera.position.y = lerp(
-				camera.position.y,
-				1.0,
-				10 * delta
-			)
+		elif direction and crouch_state:
+			velocity.x = direction.x * CROUCH_SPEED
+			velocity.z = direction.z * CROUCH_SPEED
 
 		elif direction:
 			velocity.x = direction.x * SPEED
@@ -269,8 +309,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = 0
 			velocity.z = 0
-
-	move_and_slide()
+		
+		move_and_slide()
+		
 
 func _enter_tree() -> void:
 	add_to_group("players")

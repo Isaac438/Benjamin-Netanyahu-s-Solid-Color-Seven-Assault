@@ -12,20 +12,23 @@ func _ready() -> void:
 	raycast.target_position = direction * 2.0
 	raycast.enabled = true
 
+var ticks = 0.0
 func _physics_process(delta: float) -> void:
-	velocity = direction * speed
+	ticks += delta
+	if ticks >= 0.03:
+		velocity = direction * speed
 
-	if multiplayer.is_server():
-		raycast.target_position = direction * (speed * delta)
-		raycast.force_raycast_update()
+		if multiplayer.is_server():
+			raycast.target_position = direction * (speed * delta)
+			raycast.force_raycast_update()
 
-		if raycast.is_colliding():
-			var hit = raycast.get_collider()
+			if raycast.is_colliding():
+				var hit = raycast.get_collider()
 
-			if hit.is_in_group("destructible"):
-				net.request_damage(hit.get_path(), 25)
+				if hit.is_in_group("destructible"):
+					net.request_damage(hit.get_path(), 25)
 
-			queue_free()
-			return
+				queue_free()
+				return
 
-	move_and_slide()
+		move_and_slide()
