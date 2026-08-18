@@ -176,7 +176,8 @@ func respawn() -> void:
 func _input(event) -> void:
 	if not is_multiplayer_authority():
 		return
-
+	if get_tree().paused:
+		return
 	if event.is_action_pressed("e"):
 		if lean_state == -1:
 			lean_state = 0
