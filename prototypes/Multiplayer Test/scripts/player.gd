@@ -28,7 +28,8 @@ const PRONE_SPEED = 2.0
 const JUMP_VELOCITY = 4.5 * 2
 const MOUSE_SENS = 0.002
 const STAND_HEIGHT = 1.8
-const CROUCH_HEIGHT = 1.35
+const CROUCH_HEIGHT = 1.5
+const PRONE_HEIGHT = 1.0
 
 var just_teleported := true
 var fire_timer := 0.0
@@ -204,12 +205,12 @@ func _input(event) -> void:
 				deg_to_rad(90)
 			)
 			
-	if Input.is_action_pressed("c"):
+	if event.is_action_pressed("c"):
 		if prone_state == true and crouch_state == false:
 			prone_state = false
 		crouch_state = !crouch_state
 		
-	if event.is_action_pressed("LEFT_CONTROL"):
+	if event.is_action_pressed("prone"):
 		if crouch_state == true and prone_state == false:
 			crouch_state = false
 		prone_state = !prone_state
@@ -234,8 +235,15 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 			
 		elif crouch_state == true and prone_state == false:
-			collider.shape.height = CROUCH_HEIGHT
-			mesh.scale.y = CROUCH_HEIGHT / 2.0
+			collider.shape.height = lerp(
+				collider.shape.height,
+				CROUCH_HEIGHT,
+				10 * delta)
+			mesh.scale.y = lerp(
+				mesh.scale.y,
+				CROUCH_HEIGHT / 2.0,
+				10 * delta)
+				
 			camera.position.y = lerp(
 				camera.position.y,
 				1.0,
@@ -245,27 +253,38 @@ func _physics_process(delta: float) -> void:
 		elif prone_state == true and crouch_state == false:
 			collider.rotation.x = lerp(
 				collider.rotation.x,
-				-90.0,
+				deg_to_rad(-90.0),
 				10 * delta
 			)
 			
 			mesh.rotation.x = lerp(
-				collider.rotation.x,
-				-90.0,
+				mesh.rotation.x,
+				deg_to_rad(-90.0),
 				10 * delta
 			)
 			
+			camera.position.y = lerp(
+				camera.position.y,
+				PRONE_HEIGHT,
+				10 * delta
+			)
+			
+			camera.position.z = lerp(
+				camera.position.z,
+				-0.75,
+				10 * delta
+			)
 		else:
 			collider.shape.height = STAND_HEIGHT
 			collider.rotation.x = lerp(
 				collider.rotation.x,
-				0.0,
+				deg_to_rad(0.0),
 				10 * delta
 			)
 			
 			mesh.rotation.x = lerp(
-				collider.rotation.x,
-				0.0,
+				mesh.rotation.x,
+				deg_to_rad(0.0),
 				10 * delta
 			)
 			mesh.scale.y = 1.0
