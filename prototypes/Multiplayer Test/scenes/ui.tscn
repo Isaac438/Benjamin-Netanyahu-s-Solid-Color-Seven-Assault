@@ -11,6 +11,9 @@
 [ext_resource type="Script" uid="uid://bpyjqn7kwe1sx" path="res://scripts/username_editor.gd" id="8_cgfq5"]
 [ext_resource type="Script" uid="uid://cfdgmacwhtddr" path="res://scripts/check_button.gd" id="9_7dvkv"]
 [ext_resource type="Script" uid="uid://babny2b5fsfcn" path="res://scripts/quit_button.gd" id="10_vdcm2"]
+[ext_resource type="Script" uid="uid://b10c83erp11ub" path="res://scripts/fsr_magnitude_slider.gd" id="11_vsj0x"]
+[ext_resource type="Script" uid="uid://cghd38xvy6gap" path="res://scripts/fsr_magnitude.gd" id="12_h1mc3"]
+[ext_resource type="Script" uid="uid://pejnjxnvh7b6" path="res://scripts/fsr_mode.gd" id="12_qsv74"]
 
 [node name="ui" type="CanvasLayer" unique_id=277036080]
 
@@ -133,6 +136,63 @@ offset_bottom = 1080.0
 text = "Quit"
 script = ExtResource("10_vdcm2")
 
+[node name="HSlider" type="HSlider" parent="PauseMenu" unique_id=257398489]
+layout_mode = 0
+offset_left = 1713.0
+offset_top = 175.0
+offset_right = 1849.0
+offset_bottom = 191.0
+tick_count = 3
+ticks_on_borders = true
+
+[node name="HSlider2" type="HSlider" parent="PauseMenu" unique_id=1191633004]
+layout_mode = 0
+offset_left = 1715.0
+offset_top = 254.0
+offset_right = 1851.0
+offset_bottom = 270.0
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.01
+tick_count = 99
+ticks_on_borders = true
+script = ExtResource("11_vsj0x")
+
+[node name="Upscaling Magnitude" type="Label" parent="PauseMenu" unique_id=2121936054]
+layout_mode = 0
+offset_left = 1759.0
+offset_top = 282.0
+offset_right = 1835.0
+offset_bottom = 305.0
+text = "Native"
+script = ExtResource("12_h1mc3")
+
+[node name="Upscaling Mode label" type="Label" parent="PauseMenu" unique_id=1332539781]
+layout_mode = 0
+offset_left = 1543.0
+offset_top = 171.0
+offset_right = 1619.0
+offset_bottom = 194.0
+text = "Upscaling Mode:"
+
+[node name="Upscaling Magnitude Label" type="Label" parent="PauseMenu" unique_id=1158119275]
+layout_mode = 0
+offset_left = 1541.0
+offset_top = 256.0
+offset_right = 1708.0
+offset_bottom = 279.0
+text = "Upscaling Magnitude:"
+
+[node name="Upscaling Mode" type="Label" parent="PauseMenu" unique_id=1180656995]
+layout_mode = 0
+offset_left = 1752.0
+offset_top = 204.0
+offset_right = 1828.0
+offset_bottom = 227.0
+text = "Bilinear"
+script = ExtResource("12_qsv74")
+
 [node name="fps_counter" type="Label" parent="." unique_id=1587743950]
 offset_left = 1776.0
 offset_top = 26.0
@@ -151,3 +211,6 @@ script = ExtResource("7_p7vwb")
 [connection signal="pressed" from="PauseMenu/start server bitton" to="PauseMenu/username editor" method="joined_server"]
 [connection signal="pressed" from="PauseMenu/start server bitton" to="PauseMenu/start server bitton" method="_on_server_pressed"]
 [connection signal="button_down" from="PauseMenu/QuitButton" to="PauseMenu/QuitButton" method="quit"]
+[connection signal="value_changed" from="PauseMenu/HSlider" to="PauseMenu/Upscaling Mode" method="_on_fsr_mode_changed"]
+[connection signal="value_changed" from="PauseMenu/HSlider2" to="PauseMenu/HSlider2" method="value_changed"]
+[connection signal="value_changed" from="PauseMenu/HSlider2" to="PauseMenu/Upscaling Magnitude" method="value_changed"]
